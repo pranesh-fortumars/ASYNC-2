@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 
 const experiences = [
@@ -48,6 +48,17 @@ const experiences = [
 
 export function ExperienceSection() {
   const containerRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   return (
     <section
@@ -73,8 +84,14 @@ export function ExperienceSection() {
         </motion.div>
 
         <div className="relative">
-          {/* Vertical Timeline Line */}
-          <div className="absolute left-0 sm:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
+          {/* Vertical Timeline Background */}
+          <div className="absolute left-0 sm:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2" />
+          
+          {/* Animated Scroll Progress Line */}
+          <motion.div 
+            className="absolute left-0 sm:left-1/2 top-0 bottom-0 w-[2px] bg-accent -translate-x-1/2 origin-top shadow-[0_0_10px_rgba(122,0,255,0.8)]"
+            style={{ scaleY }}
+          />
 
           {experiences.map((exp, index) => {
             const isEven = index % 2 === 0;
