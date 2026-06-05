@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/navigation/navbar";
 import { HeroSection } from "@/components/hero/hero-section";
 import { AboutSection } from "@/components/about/about-section";
+import { GithubAnalytics } from "@/components/github/github-analytics";
 import { SkillsSection } from "@/components/skills/skills-galaxy";
 import { ExperienceSection } from "@/components/experience/experience-section";
 import { CertificationsSection } from "@/components/certifications/certifications-section";
@@ -21,6 +22,7 @@ export default function Home() {
         
         <HeroSection />
         <AboutSection />
+        <GithubAnalytics />
         <SkillsSection />
         <ExperienceSection />
         <CertificationsSection />

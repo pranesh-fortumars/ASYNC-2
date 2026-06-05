@@ -3,48 +3,14 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const achievements = [
-  {
-    title: "Code Conquest",
-    value: 1,
-    suffix: "st",
-    description: "Leaderboard Rank in National Hackathon",
-    icon: "🥇",
-    color: "text-yellow-500",
-  },
-  {
-    title: "POTD Streak",
-    value: 365,
-    suffix: "+",
-    description: "Days of continuous coding and problem solving",
-    icon: "🔥",
-    color: "text-orange-500",
-  },
-  {
-    title: "Bugs Found",
-    value: 50,
-    suffix: "+",
-    description: "Vulnerabilities discovered and reported",
-    icon: "🐛",
-    color: "text-green-500",
-  },
-  {
-    title: "Tech Competitions",
-    value: 10,
-    suffix: "x",
-    description: "Winner or finalist in various events",
-    icon: "🏆",
-    color: "text-blue-500",
-  },
-];
-
 const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (inView) {
+    // Re-run if value changes (e.g. from 0 to actual fetched value)
+    if (inView && value > 0) {
       let start = 0;
       const end = value;
       const duration = 2000;
@@ -73,6 +39,62 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
 };
 
 export function AchievementsSection() {
+  const [lcStats, setLcStats] = useState({
+    totalSolved: 150, // default placeholders
+    ranking: 50000,
+    acceptanceRate: 65,
+  });
+
+  useEffect(() => {
+    fetch("https://leetcode-stats-api.herokuapp.com/praneshs616")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          setLcStats({
+            totalSolved: data.totalSolved || 0,
+            ranking: data.ranking || 0,
+            acceptanceRate: Math.floor(data.acceptanceRate) || 0,
+          });
+        }
+      })
+      .catch((err) => console.error("Failed to fetch LeetCode stats", err));
+  }, []);
+
+  const achievements = [
+    {
+      title: "Global Ranking",
+      value: lcStats.ranking,
+      suffix: "",
+      description: "LeetCode Global Rank",
+      icon: "🥇",
+      color: "text-yellow-500",
+    },
+    {
+      title: "Problems Solved",
+      value: lcStats.totalSolved,
+      suffix: "+",
+      description: "Data Structures & Algorithms",
+      icon: "💻",
+      color: "text-primary",
+    },
+    {
+      title: "Acceptance Rate",
+      value: lcStats.acceptanceRate,
+      suffix: "%",
+      description: "Code efficiency & accuracy",
+      icon: "🔥",
+      color: "text-orange-500",
+    },
+    {
+      title: "Bugs Hunted",
+      value: 50,
+      suffix: "+",
+      description: "Vulnerabilities discovered",
+      icon: "🐛",
+      color: "text-green-500",
+    },
+  ];
+
   return (
     <section className="relative w-full py-32 px-4 flex flex-col items-center bg-[#000000]">
       <div className="max-w-6xl w-full z-10">
@@ -84,9 +106,10 @@ export function AchievementsSection() {
           className="mb-16 text-center"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Wall of <span className="text-yellow-500">Achievements</span>
+            Live <span className="text-primary">Performance Metrics</span>
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-yellow-500 to-transparent mx-auto" />
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent mx-auto" />
+          <p className="mt-4 text-white/50 font-mono text-sm">Data synced via public APIs</p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -100,7 +123,7 @@ export function AchievementsSection() {
               className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/20 transition-colors group text-center flex flex-col items-center relative overflow-hidden"
             >
               {/* Glow effect on hover */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-white/5 rounded-full blur-[50px] group-hover:bg-yellow-500/10 transition-colors" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-white/5 rounded-full blur-[50px] group-hover:bg-primary/10 transition-colors" />
 
               <div className="text-4xl mb-4 relative z-10">{item.icon}</div>
               <div
