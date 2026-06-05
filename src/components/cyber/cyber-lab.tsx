@@ -81,7 +81,7 @@ export function CyberLabSection() {
                   r="80"
                   className="stroke-secondary stroke-[12] fill-none"
                   strokeLinecap="round"
-                  initial={{ strokeDasharray: "502.65", strokeDashoffset: "502.65" }}
+                  initial={{ strokeDasharray: 502.65, strokeDashoffset: 502.65 }}
                   whileInView={{ strokeDashoffset: 502.65 - (502.65 * threatLevel) / 100 }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
                 />
