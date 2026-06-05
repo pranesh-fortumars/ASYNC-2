@@ -1,0 +1,94 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useRef } from "react";
+
+export function AboutSection() {
+  const containerRef = useRef<HTMLElement>(null);
+
+  const stats = [
+    { label: "Years Experience", value: "3+" },
+    { label: "Projects Completed", value: "20+" },
+    { label: "Certifications", value: "5+" },
+  ];
+
+  return (
+    <section
+      id="about"
+      ref={containerRef}
+      className="relative w-full min-h-screen py-32 px-4 flex flex-col items-center bg-[#050505]"
+    >
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="max-w-5xl w-full z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            About <span className="text-primary">Me</span>
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent" />
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Story Text */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6 text-lg text-white/70 font-light"
+          >
+            <p>
+              I am a passionate <strong className="text-white">Cybersecurity Engineer</strong> and <strong className="text-white">AI Developer</strong> dedicated to building secure, intelligent, and scalable digital solutions.
+            </p>
+            <p>
+              My journey began with a deep curiosity for how systems work, which evolved into a mission to protect them. I specialize in penetration testing, ethical hacking, and integrating AI to solve complex problems.
+            </p>
+            <p>
+              Beyond security, I love crafting immersive web experiences and exploring the potential of blockchain technology. I believe in writing code that is not only functional but also beautiful and secure by design.
+            </p>
+          </motion.div>
+
+          {/* Stats & Cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group"
+              >
+                <div className="text-4xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                  {stat.value}
+                </div>
+                <div className="text-sm uppercase tracking-wider text-white/50">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 backdrop-blur-sm sm:col-span-2 flex items-center justify-between group cursor-pointer hover:border-primary/60 transition-colors">
+              <div>
+                <h3 className="text-xl font-bold text-white mb-1">Download Resume</h3>
+                <p className="text-sm text-white/60">Get a detailed look at my experience.</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
+                &darr;
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
