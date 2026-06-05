@@ -16,7 +16,6 @@ const technologies = [
 function Word({ children, position }: { children: string; position: THREE.Vector3 }) {
   const color = new THREE.Color();
   const fontProps = {
-    font: "/Inter-Bold.ttf", // Make sure to use a valid font if we want custom fonts, defaulting to basic here.
     fontSize: 0.8,
     letterSpacing: -0.05,
     lineHeight: 1,

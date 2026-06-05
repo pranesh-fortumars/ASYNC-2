@@ -9,14 +9,11 @@ import { TechSphereSection } from "@/components/tech/tech-sphere";
 import { AchievementsSection } from "@/components/achievements/achievements-section";
 import { ContactSection } from "@/components/contact/contact-section";
 import { PageLoader } from "@/components/layout/page-loader";
-import { AnimatePresence } from "framer-motion";
 
 export default function Home() {
   return (
     <>
-      <AnimatePresence mode="wait">
-        <PageLoader />
-      </AnimatePresence>
+      <PageLoader />
       <main className="relative min-h-screen flex flex-col bg-black text-white selection:bg-primary/30 overflow-x-hidden">
         <Navbar />
         
