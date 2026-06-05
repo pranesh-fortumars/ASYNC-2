@@ -3,12 +3,35 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
-import { Command } from "lucide-react";
+import { Command, Palette } from "lucide-react";
 
 export function Navbar() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState("");
+
+  const themes = [
+    { id: "", name: "Professional" },
+    { id: "theme-cyberpunk", name: "Cyberpunk" },
+    { id: "theme-matrix", name: "Matrix" },
+  ];
+
+  const cycleTheme = () => {
+    const currentIndex = themes.findIndex((t) => t.id === theme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    const nextTheme = themes[nextIndex].id;
+    
+    setTheme(nextTheme);
+    
+    // Remove all theme classes first
+    document.documentElement.classList.remove("theme-cyberpunk", "theme-matrix");
+    
+    // Add new theme if not default
+    if (nextTheme) {
+      document.documentElement.classList.add(nextTheme);
+    }
+  };
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -71,10 +94,23 @@ export function Navbar() {
           ))}
         </div>
 
-        <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/10 backdrop-blur-sm">
-          <Command size={16} />
-          <span className="hidden sm:inline">Menu</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={cycleTheme}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-white/5 hover:bg-white/10 hover:text-primary transition-colors border border-white/5"
+            title="Cycle Theme"
+          >
+            <Palette size={16} />
+            <span className="hidden sm:inline text-xs opacity-70">
+              {themes.find(t => t.id === theme)?.name}
+            </span>
+          </button>
+          
+          <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/10 backdrop-blur-sm">
+            <Command size={16} />
+            <span className="hidden sm:inline">Menu</span>
+          </button>
+        </div>
       </nav>
     </motion.header>
   );

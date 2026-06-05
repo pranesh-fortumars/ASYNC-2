@@ -6,9 +6,27 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  --color-primary: #00f0ff;
-  --color-secondary: #ff003c;
-  --color-accent: #7a00ff;
+  --color-primary: var(--theme-primary);
+  --color-secondary: var(--theme-secondary);
+  --color-accent: var(--theme-accent);
+}
+
+:root {
+  --theme-primary: #00f0ff;
+  --theme-secondary: #ff003c;
+  --theme-accent: #7a00ff;
+}
+
+.theme-cyberpunk {
+  --theme-primary: #fcee0a;
+  --theme-secondary: #ff003c;
+  --theme-accent: #00f0ff;
+}
+
+.theme-matrix {
+  --theme-primary: #00ff41;
+  --theme-secondary: #008f11;
+  --theme-accent: #003b00;
 }
 
 :root {

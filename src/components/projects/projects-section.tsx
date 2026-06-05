@@ -2,8 +2,10 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, X, Activity, Server, Cpu } from "lucide-react";
 import { GithubIcon } from "@/components/icons/brand-icons";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const projects = [
   {
@@ -31,6 +33,7 @@ const projects = [
 
 const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -61,72 +64,152 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const isEven = index % 2 === 0;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8 }}
-      className={`flex flex-col ${
-        isEven ? "lg:flex-row" : "lg:flex-row-reverse"
-      } gap-8 items-center mb-32 group`}
-    >
-      {/* 3D Image Container */}
+    <>
       <motion.div
-        ref={ref}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        className="w-full lg:w-3/5 aspect-video relative rounded-3xl overflow-hidden cursor-pointer"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className={`flex flex-col ${
+          isEven ? "lg:flex-row" : "lg:flex-row-reverse"
+        } gap-8 items-center mb-32 group`}
       >
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-          style={{ backgroundImage: `url(${project.image})` }}
-        />
-        <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} mix-blend-multiply opacity-60 group-hover:opacity-0 transition-opacity duration-500`} />
-        
-        {/* Shine */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        {/* 3D Image Container */}
+        <motion.div
+          ref={ref}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => setIsOpen(true)}
+          style={{
+            rotateX,
+            rotateY,
+            transformStyle: "preserve-3d",
+          }}
+          className="w-full lg:w-3/5 aspect-video relative rounded-3xl overflow-hidden cursor-pointer"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+            style={{ backgroundImage: `url(${project.image})` }}
+          />
+          <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} mix-blend-multiply opacity-60 group-hover:opacity-0 transition-opacity duration-500`} />
+          
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <span className="px-6 py-3 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white font-medium">
+              View Deep Dive
+            </span>
+          </div>
+          
+          {/* Shine */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        </motion.div>
+
+        {/* Content */}
+        <div className="w-full lg:w-2/5 flex flex-col justify-center">
+          <h3 className="text-3xl md:text-4xl font-bold mb-4 text-white group-hover:text-primary transition-colors">
+            {project.title}
+          </h3>
+          
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md mb-6 relative">
+            <p className="text-white/70 leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-8">
+            {project.tech.map((t: string, i: number) => (
+              <span
+                key={i}
+                className="px-3 py-1 text-sm font-medium rounded-full bg-white/5 text-white/80 border border-white/10"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex gap-4">
+            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-black font-semibold hover:bg-primary/90 transition-colors">
+              <ExternalLink size={18} />
+              Live Demo
+            </button>
+            <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 text-white font-semibold hover:bg-white/20 transition-colors border border-white/10 backdrop-blur-md">
+              <GithubIcon className="w-[18px] h-[18px]" />
+              Source Code
+            </button>
+          </div>
+        </div>
       </motion.div>
 
-      {/* Content */}
-      <div className="w-full lg:w-2/5 flex flex-col justify-center">
-        <h3 className="text-3xl md:text-4xl font-bold mb-4 text-white group-hover:text-primary transition-colors">
-          {project.title}
-        </h3>
-        
-        <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md mb-6 relative">
-          <p className="text-white/70 leading-relaxed">
-            {project.description}
-          </p>
-        </div>
-
-        <div className="flex flex-wrap gap-2 mb-8">
-          {project.tech.map((t: string, i: number) => (
-            <span
-              key={i}
-              className="px-3 py-1 text-sm font-medium rounded-full bg-white/5 text-white/80 border border-white/10"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 bg-black/90 backdrop-blur-xl"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="relative w-full max-w-6xl h-full max-h-[90vh] bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden flex flex-col"
             >
-              {t}
-            </span>
-          ))}
-        </div>
+              <button 
+                onClick={() => setIsOpen(false)}
+                className="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/5 hover:bg-red-500/20 text-white hover:text-red-500 transition-colors"
+              >
+                <X size={24} />
+              </button>
 
-        <div className="flex gap-4">
-          <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-black font-semibold hover:bg-primary/90 transition-colors">
-            <ExternalLink size={18} />
-            Live Demo
-          </button>
-          <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 text-white font-semibold hover:bg-white/20 transition-colors border border-white/10 backdrop-blur-md">
-            <GithubIcon className="w-[18px] h-[18px]" />
-            Source Code
-          </button>
-        </div>
-      </div>
-    </motion.div>
+              <div className="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar">
+                <div className="flex flex-col md:flex-row gap-12">
+                  <div className="w-full md:w-1/2">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">{project.title}</h2>
+                    <p className="text-xl text-white/70 mb-8 leading-relaxed">
+                      {project.description}
+                    </p>
+
+                    <div className="grid grid-cols-2 gap-4 mb-12">
+                      <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                        <Activity className="text-primary mb-4" size={24} />
+                        <h4 className="text-2xl font-bold">99.9%</h4>
+                        <p className="text-sm text-white/50">Uptime</p>
+                      </div>
+                      <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                        <Server className="text-secondary mb-4" size={24} />
+                        <h4 className="text-2xl font-bold">150ms</h4>
+                        <p className="text-sm text-white/50">Latency</p>
+                      </div>
+                      <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                        <Cpu className="text-accent mb-4" size={24} />
+                        <h4 className="text-2xl font-bold">O(1)</h4>
+                        <p className="text-sm text-white/50">Complexity</p>
+                      </div>
+                      <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                        <ExternalLink className="text-white/80 mb-4" size={24} />
+                        <h4 className="text-2xl font-bold">10k+</h4>
+                        <p className="text-sm text-white/50">Users</p>
+                      </div>
+                    </div>
+
+                    <h3 className="text-2xl font-bold mb-4">Architecture</h3>
+                    <p className="text-white/60 mb-6">
+                      Implemented using a microservices architecture with a focus on high availability and fault tolerance. The system utilizes distributed caching and edge computing to minimize latency.
+                    </p>
+                  </div>
+
+                  <div className="w-full md:w-1/2 space-y-6">
+                    <div className="w-full aspect-video rounded-2xl bg-cover bg-center border border-white/10" style={{ backgroundImage: `url(${project.image})` }} />
+                    <div className="w-full aspect-video rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+                      <span className="text-white/30 font-mono">[ Architecture Diagram Visualization ]</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
