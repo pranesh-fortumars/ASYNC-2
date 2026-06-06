@@ -1,8 +1,11 @@
 import { Navbar } from "@/components/navigation/navbar";
 import { HeroSection } from "@/components/hero/hero-section";
+import { DevMetricsSection } from "@/components/metrics/dev-metrics";
 import { ParticleBackground } from "@/components/hero/particle-background";
 import { AboutSection } from "@/components/about/about-section";
 import { GithubAnalytics } from "@/components/github/github-analytics";
+import { TechEcosystemSection } from "@/components/architecture/tech-ecosystem";
+import { SystemDesignSection } from "@/components/architecture/system-design";
 import { SkillsSection } from "@/components/skills/skills-galaxy";
 import { CyberLabSection } from "@/components/cyber/cyber-lab";
 import { ExperienceSection } from "@/components/experience/experience-section";
@@ -25,8 +28,11 @@ export default function Home() {
         <Navbar />
         
         <HeroSection />
+        <DevMetricsSection />
         <AboutSection />
         <GithubAnalytics />
+        <TechEcosystemSection />
+        <SystemDesignSection />
         <SkillsSection />
         <CyberLabSection />
         <ExperienceSection />

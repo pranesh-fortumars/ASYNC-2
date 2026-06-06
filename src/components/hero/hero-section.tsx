@@ -7,7 +7,11 @@ import { Cpu, Shield, Code2, Database } from "lucide-react";
 export function HeroSection() {
   const [textIndex, setTextIndex] = useState(0);
   const titles = [
+    "Full Stack Software Developer",
+    "System Architect",
     "Cybersecurity Engineer",
+    "AI Innovator",
+    "Blockchain Developer",
     "AI Developer",
     "Full Stack Developer",
     "Blockchain Enthusiast",
@@ -158,6 +162,45 @@ export function HeroSection() {
             <div className="opacity-50">Scanning vulnerabilities...</div>
             <div className="text-secondary mt-2">[ALERT] Intrusion detected.</div>
           </motion.div>
+
+          {/* Floating Code Editor 1: TS */}
+          <motion.div 
+            className="absolute top-10 -right-4 z-20 w-56 bg-black/80 backdrop-blur-md border border-white/10 rounded-lg p-3 font-mono text-[10px] shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+            animate={{ y: ["-10px", "10px", "-10px"] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          >
+            <div className="flex gap-1 mb-2">
+              <div className="w-2 h-2 rounded-full bg-red-500" />
+              <div className="w-2 h-2 rounded-full bg-yellow-500" />
+              <div className="w-2 h-2 rounded-full bg-green-500" />
+            </div>
+            <pre className="text-white/80">
+              <code className="text-primary">const</code> <span className="text-blue-400">buildFuture</span> = <span className="text-primary">async</span> () {`=>`} {`{\n`}
+              {`  `}<span className="text-primary">await</span> <span className="text-yellow-200">innovate</span>();{`\n`}
+              {`  `}<span className="text-primary">await</span> <span className="text-yellow-200">secure</span>();{`\n`}
+              {`  `}<span className="text-primary">await</span> <span className="text-yellow-200">scale</span>();{`\n`}
+              {`}`}
+            </pre>
+          </motion.div>
+
+          {/* Floating Code Editor 2: Python */}
+          <motion.div 
+            className="absolute bottom-32 -right-12 z-20 w-60 bg-black/80 backdrop-blur-md border border-white/10 rounded-lg p-3 font-mono text-[10px] shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+            animate={{ y: ["10px", "-10px", "10px"] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+          >
+            <div className="flex gap-1 mb-2">
+              <div className="w-2 h-2 rounded-full bg-red-500" />
+              <div className="w-2 h-2 rounded-full bg-yellow-500" />
+              <div className="w-2 h-2 rounded-full bg-green-500" />
+            </div>
+            <pre className="text-white/80">
+              <code className="text-secondary">class</code> <span className="text-blue-400">AIEngineer</span>:{`\n`}
+              {`  `}<code className="text-secondary">def</code> <span className="text-yellow-200">innovate</span>(self):{`\n`}
+              {`    `}<code className="text-primary">return</code> <span className="text-green-400">"Building Solutions"</span>
+            </pre>
+          </motion.div>
+
 
         </div>
       </div>
