@@ -22,6 +22,11 @@
   100% { transform: rotateX(60deg) translateY(100px); }
 }
 
+@keyframes scanline {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(100%); }
+}
+
 :root {
   --theme-primary: #00f0ff;
   --theme-secondary: #ff003c;

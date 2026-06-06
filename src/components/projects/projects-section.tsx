@@ -74,7 +74,6 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
           isEven ? "lg:flex-row" : "lg:flex-row-reverse"
         } gap-8 items-center mb-32 group`}
       >
-        {/* 3D Image Container */}
         <motion.div
           ref={ref}
           onMouseMove={handleMouseMove}
@@ -85,22 +84,25 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
             rotateY,
             transformStyle: "preserve-3d",
           }}
-          className="w-full lg:w-3/5 aspect-video relative rounded-3xl overflow-hidden cursor-pointer"
+          className="w-full lg:w-3/5 aspect-video relative rounded-3xl overflow-hidden cursor-pointer border border-white/5 group-hover:border-primary/50 shadow-[0_0_0_rgba(0,240,255,0)] group-hover:shadow-[0_0_40px_rgba(0,240,255,0.3)] transition-all duration-500"
         >
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
             style={{ backgroundImage: `url(${project.image})` }}
           />
-          <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} mix-blend-multiply opacity-60 group-hover:opacity-0 transition-opacity duration-500`} />
+          <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} mix-blend-multiply opacity-80 group-hover:opacity-40 transition-opacity duration-500`} />
           
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span className="px-6 py-3 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white font-medium">
-              View Deep Dive
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
+            <span className="px-8 py-4 rounded-full bg-black/60 backdrop-blur-xl border border-primary text-white font-bold tracking-widest uppercase text-sm shadow-[0_0_20px_rgba(0,240,255,0.5)]">
+              Initiate Deep Dive
             </span>
           </div>
           
+          {/* Holographic Anime Scanline */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(0,240,255,0.2)_50%,transparent_100%)] h-[200%] -top-[100%] group-hover:animate-[scanline_2s_linear_infinite] pointer-events-none opacity-0 group-hover:opacity-100 mix-blend-overlay z-10" />
+          
           {/* Shine */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-primary/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
         </motion.div>
 
         {/* Content */}
@@ -224,10 +226,10 @@ export function ProjectsSection() {
           transition={{ duration: 0.8 }}
           className="mb-24 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Featured <span className="text-primary">Projects</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-[0_0_15px_rgba(0,240,255,0.5)]">
+            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Projects</span>
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent mx-auto" />
+          <div className="w-20 h-1 bg-gradient-to-r from-primary via-secondary to-transparent mx-auto shadow-[0_0_10px_rgba(0,240,255,0.8)]" />
         </motion.div>
 
         <div className="perspective-[2000px]">

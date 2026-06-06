@@ -49,12 +49,12 @@ export function CyberLabSection() {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 flex items-center justify-center gap-4">
-            <ShieldAlert className="text-secondary" size={40} />
-            Cyber <span className="text-secondary">Command Center</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 flex items-center justify-center gap-4 drop-shadow-[0_0_15px_rgba(255,0,60,0.5)]">
+            <ShieldAlert className="text-secondary animate-pulse" size={40} />
+            Cyber <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">Command Center</span>
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-secondary to-transparent mx-auto" />
-          <p className="mt-4 text-white/50 font-mono">Live Threat Analysis & Vulnerability Scanning</p>
+          <div className="w-20 h-1 bg-gradient-to-r from-secondary via-primary to-transparent mx-auto shadow-[0_0_10px_rgba(255,0,60,0.8)]" />
+          <p className="mt-4 text-white/50 font-mono tracking-widest uppercase text-sm">Live Threat Analysis & Vulnerability Scanning</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -159,19 +159,38 @@ export function CyberLabSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="lg:col-span-3 p-6 rounded-2xl bg-black border border-white/10 relative overflow-hidden h-[300px] flex items-center justify-center group"
+            className="lg:col-span-3 p-6 rounded-2xl bg-[#030303] border border-secondary/20 relative overflow-hidden h-[400px] flex items-center justify-center group shadow-[0_0_30px_rgba(255,0,60,0.1)]"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.1)_0%,transparent_70%)]" />
+            {/* Grid & Radial Glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.1)_0%,transparent_60%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,0,60,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,0,60,0.05)_1px,transparent_1px)] bg-[size:20px_20px]" />
             
             {/* Pulsing Radar Effect */}
-            <div className="absolute w-[600px] h-[600px] border border-primary/20 rounded-full animate-[spin_10s_linear_infinite]" style={{ clipPath: "polygon(50% 50%, 100% 0, 100% 100%)" }} />
-            <div className="absolute w-[400px] h-[400px] border border-primary/20 rounded-full" />
-            <div className="absolute w-[200px] h-[200px] border border-primary/20 rounded-full" />
+            <div className="absolute w-[800px] h-[800px] border border-primary/20 rounded-full animate-[spin_8s_linear_infinite]" style={{ clipPath: "polygon(50% 50%, 100% 0, 100% 100%)", background: "conic-gradient(from 0deg, transparent 70%, rgba(0, 240, 255, 0.2) 100%)" }} />
+            <div className="absolute w-[600px] h-[600px] border border-primary/20 rounded-full border-dashed animate-[spin_20s_linear_infinite_reverse]" />
+            <div className="absolute w-[400px] h-[400px] border border-secondary/30 rounded-full shadow-[0_0_30px_rgba(255,0,60,0.2)]" />
+            <div className="absolute w-[200px] h-[200px] border border-primary/40 rounded-full" />
             
-            <div className="z-10 text-center">
-              <Zap className="w-16 h-16 text-primary mx-auto mb-4 animate-pulse" />
-              <h3 className="text-2xl font-bold text-white tracking-widest">GLOBAL THREAT MAP</h3>
-              <p className="text-primary font-mono mt-2 uppercase text-sm">Monitoring 43 active vectors</p>
+            {/* Animated Threat Nodes */}
+            {Array.from({ length: 5 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 bg-secondary rounded-full shadow-[0_0_10px_#ff003c]"
+                initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+                animate={{ 
+                  opacity: [0, 1, 0], 
+                  scale: [0, 1.5, 0],
+                  x: (Math.random() - 0.5) * 600,
+                  y: (Math.random() - 0.5) * 400
+                }}
+                transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
+              />
+            ))}
+
+            <div className="z-10 text-center bg-black/60 p-6 rounded-xl border border-white/10 backdrop-blur-md">
+              <Zap className="w-16 h-16 text-primary mx-auto mb-4 animate-pulse drop-shadow-[0_0_15px_rgba(0,240,255,0.8)]" />
+              <h3 className="text-2xl font-bold text-white tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">GLOBAL THREAT MAP</h3>
+              <p className="text-secondary font-mono mt-2 uppercase text-sm animate-pulse">[ Monitoring 43 Active Vectors ]</p>
             </div>
           </motion.div>
         </div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import { AnimatedText } from "@/components/ui/animated-text";
 
 export function AboutSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -29,10 +30,11 @@ export function AboutSection() {
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            About <span className="text-primary">Me</span>
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent" />
+          <AnimatedText 
+            text="About Me" 
+            className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-[0_0_15px_rgba(0,240,255,0.5)]" 
+          />
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-transparent shadow-[0_0_10px_rgba(0,240,255,0.8)]" />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

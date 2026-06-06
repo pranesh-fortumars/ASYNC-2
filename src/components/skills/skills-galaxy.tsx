@@ -2,7 +2,7 @@
 
 import { useRef, useState, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Sphere, Text, OrbitControls, Float } from "@react-three/drei";
+import { Sphere, Text, OrbitControls, Float, Line } from "@react-three/drei";
 import * as THREE from "three";
 import { motion } from "framer-motion";
 
@@ -88,10 +88,26 @@ function Galaxy({ setHoveredData }: { setHoveredData: (d: any | null) => void })
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1} />
       
-      {/* Central Star */}
+      {/* Central Neural Star */}
       <Sphere args={[0.8, 32, 32]}>
-        <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1} />
+        <meshStandardMaterial color="#ffffff" emissive="#00f0ff" emissiveIntensity={2} />
       </Sphere>
+
+      {/* Orbit Rings / Neural Connections */}
+      {skillCategories.map((cat, i) => {
+        const radius = Math.sqrt(cat.position[0] ** 2 + cat.position[1] ** 2 + cat.position[2] ** 2);
+        const points = [];
+        for (let angle = 0; angle <= Math.PI * 2; angle += 0.1) {
+          // Approximate orbit path for visual effect
+          points.push(new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * (cat.position[1]/2), Math.sin(angle) * radius));
+        }
+        return (
+          <group key={`orbit-${i}`}>
+            <Line points={points} color={cat.color} opacity={0.2} transparent lineWidth={1} />
+            <Line points={[new THREE.Vector3(0,0,0), new THREE.Vector3(...cat.position)]} color={cat.color} opacity={0.3} transparent lineWidth={2} dashed dashSize={0.2} gapSize={0.1} />
+          </group>
+        );
+      })}
 
       {skillCategories.map((category, idx) => (
         <Planet key={idx} data={category} onHover={setHoveredData} />
@@ -110,12 +126,12 @@ export function SkillsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold mb-4 text-white"
+          className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-[0_0_15px_rgba(0,240,255,0.5)]"
         >
-          Skills <span className="text-primary">Galaxy</span>
+          Neural Skill <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Universe</span>
         </motion.h2>
-        <p className="text-white/50 max-w-2xl mx-auto px-4">
-          Explore my technical universe. Hover over the planets to discover my expertise in different domains.
+        <p className="text-white/50 max-w-2xl mx-auto px-4 font-mono uppercase text-sm tracking-widest">
+          Interactive Data Visualization // Hover nodes to inspect clusters
         </p>
       </div>
 
