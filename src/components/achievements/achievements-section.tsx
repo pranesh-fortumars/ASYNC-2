@@ -46,20 +46,19 @@ export function AchievementsSection() {
   });
 
   useEffect(() => {
-    fetch("https://alfa-leetcode-api.onrender.com/praneshs616")
+    fetch("/api/leetcode")
       .then((res) => res.json())
       .then((data) => {
         if (data && data.totalSolved) {
           setLcStats({
-            totalSolved: data.totalSolved || 150,
-            ranking: data.ranking || 50000,
+            totalSolved: data.totalSolved,
+            ranking: data.ranking,
             acceptanceRate: data.acceptanceRate ? Math.floor(data.acceptanceRate) : 65,
           });
         }
       })
       .catch(() => {
-        // Silently fallback to default values if API is down
-        console.warn("LeetCode stats API offline, using fallback metrics.");
+        console.warn("Internal API route failed.");
       });
   }, []);
 
