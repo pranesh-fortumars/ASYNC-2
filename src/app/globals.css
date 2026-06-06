@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -9,6 +15,11 @@
   --color-primary: var(--theme-primary);
   --color-secondary: var(--theme-secondary);
   --color-accent: var(--theme-accent);
+}
+
+@keyframes grid-scroll {
+  0% { transform: rotateX(60deg) translateY(0); }
+  100% { transform: rotateX(60deg) translateY(100px); }
 }
 
 :root {
