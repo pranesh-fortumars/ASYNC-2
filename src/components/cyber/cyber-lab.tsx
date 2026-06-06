@@ -37,7 +37,7 @@ export function CyberLabSection() {
   }, []);
 
   return (
-    <section id="lab" className="relative w-full py-32 px-4 flex flex-col items-center bg-[#050505] overflow-hidden">
+    <section id="lab" className="relative w-full py-32 px-4 flex flex-col items-center bg-transparent overflow-hidden">
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,240,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,240,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black_40%,transparent_100%)] pointer-events-none" />
 
@@ -116,7 +116,7 @@ export function CyberLabSection() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-2 p-1 rounded-2xl bg-gradient-to-br from-white/10 to-transparent relative overflow-hidden"
           >
-            <div className="w-full h-full bg-[#0a0a0a] rounded-xl p-6 flex flex-col">
+            <div className="w-full h-full bg-transparent rounded-xl p-6 flex flex-col">
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/5">
                 <Server className="text-white/50" size={20} />
                 <h3 className="font-mono text-white/80">root@cyber-lab:~# vulnerability-scanner</h3>
@@ -159,7 +159,7 @@ export function CyberLabSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="lg:col-span-3 p-6 rounded-2xl bg-[#030303] border border-secondary/20 relative overflow-hidden h-[400px] flex items-center justify-center group shadow-[0_0_30px_rgba(255,0,60,0.1)]"
+            className="lg:col-span-3 p-6 rounded-2xl bg-transparent border border-secondary/20 relative overflow-hidden h-[400px] flex items-center justify-center group shadow-[0_0_30px_rgba(255,0,60,0.1)]"
           >
             {/* Grid & Radial Glow */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.1)_0%,transparent_60%)]" />

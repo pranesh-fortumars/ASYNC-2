@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/navigation/navbar";
 import { HeroSection } from "@/components/hero/hero-section";
+import { ParticleBackground } from "@/components/hero/particle-background";
 import { AboutSection } from "@/components/about/about-section";
 import { GithubAnalytics } from "@/components/github/github-analytics";
 import { SkillsSection } from "@/components/skills/skills-galaxy";
@@ -19,7 +20,8 @@ export default function Home() {
     <>
       <PageLoader />
       <AiTerminal />
-      <main className="relative min-h-screen flex flex-col bg-black text-white selection:bg-primary/30 overflow-x-hidden">
+      <main className="relative min-h-screen flex flex-col bg-transparent text-white selection:bg-primary/30 overflow-x-hidden">
+        <ParticleBackground />
         <Navbar />
         
         <HeroSection />

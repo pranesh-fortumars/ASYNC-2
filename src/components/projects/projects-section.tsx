@@ -153,7 +153,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="relative w-full max-w-6xl h-full max-h-[90vh] bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden flex flex-col"
+              className="relative w-full max-w-6xl h-full max-h-[90vh] bg-transparent border border-white/10 rounded-3xl overflow-hidden flex flex-col"
             >
               <button 
                 onClick={() => setIsOpen(false)}
@@ -217,7 +217,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="relative w-full py-32 px-4 flex flex-col items-center bg-[#050505]">
+    <section id="projects" className="relative w-full py-32 px-4 flex flex-col items-center bg-transparent">
       <div className="max-w-7xl w-full z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

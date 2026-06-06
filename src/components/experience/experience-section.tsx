@@ -64,7 +64,7 @@ export function ExperienceSection() {
     <section
       id="experience"
       ref={containerRef}
-      className="relative w-full min-h-screen py-32 px-4 flex flex-col items-center bg-[#000000]"
+      className="relative w-full min-h-screen py-32 px-4 flex flex-col items-center bg-transparent"
     >
       {/* Background Effect */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />

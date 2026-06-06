@@ -95,7 +95,7 @@ const AnimeEnergyParticles = () => {
 
 export function ParticleBackground() {
   return (
-    <div className="fixed inset-0 w-full h-full bg-[#030303] z-[-1] overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 w-full h-full bg-transparent z-[-1] overflow-hidden pointer-events-none">
       <AuroraLights />
       
       {/* Layer 2 & 7: ThreeJS Stars and Particles */}

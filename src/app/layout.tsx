@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
 import { CustomCursor } from "@/components/ui/custom-cursor";
+import { AwakeningMode } from "@/components/easter-eggs/awakening-mode";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-black text-white selection:bg-white selection:text-black">
         <CustomCursor />
+        <AwakeningMode />
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

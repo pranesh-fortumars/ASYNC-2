@@ -21,7 +21,7 @@ const connections = [
 
 export function MindGraphSection() {
   return (
-    <section id="mind" className="relative w-full py-32 px-4 flex flex-col items-center bg-[#030303] overflow-hidden">
+    <section id="mind" className="relative w-full py-32 px-4 flex flex-col items-center bg-transparent overflow-hidden">
       <div className="max-w-6xl w-full z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

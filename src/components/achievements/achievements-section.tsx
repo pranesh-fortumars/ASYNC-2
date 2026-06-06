@@ -98,7 +98,7 @@ export function AchievementsSection() {
   ];
 
   return (
-    <section className="relative w-full py-32 px-4 flex flex-col items-center bg-[#000000]">
+    <section className="relative w-full py-32 px-4 flex flex-col items-center bg-transparent">
       <div className="max-w-6xl w-full z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

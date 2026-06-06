@@ -120,7 +120,7 @@ export function SkillsSection() {
   const [hoveredData, setHoveredData] = useState<any | null>(null);
 
   return (
-    <section id="skills" className="relative w-full min-h-screen bg-[#020202] py-20 flex flex-col items-center">
+    <section id="skills" className="relative w-full min-h-screen bg-transparent py-20 flex flex-col items-center">
       <div className="z-10 text-center mb-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

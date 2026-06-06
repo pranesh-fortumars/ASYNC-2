@@ -21,7 +21,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative w-full py-32 px-4 flex flex-col items-center bg-[#020202] overflow-hidden">
+    <section id="contact" className="relative w-full py-32 px-4 flex flex-col items-center bg-transparent overflow-hidden">
       {/* Grid Background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
 

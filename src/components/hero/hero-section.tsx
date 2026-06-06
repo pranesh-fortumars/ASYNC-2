@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ParticleBackground } from "./particle-background";
 import { Cpu, Shield, Code2, Database } from "lucide-react";
 
 export function HeroSection() {
@@ -32,11 +31,6 @@ export function HeroSection() {
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-10">
-      {/* 7-Layer Background */}
-      <div className="absolute inset-0 z-0">
-        <ParticleBackground />
-      </div>
-
       <div className="relative z-10 w-full max-w-7xl px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
         {/* Left Content Column */}

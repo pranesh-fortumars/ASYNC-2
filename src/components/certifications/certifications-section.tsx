@@ -116,7 +116,7 @@ const TiltCard = ({ cert }: { cert: any }) => {
 
 export function CertificationsSection() {
   return (
-    <section className="relative w-full py-32 px-4 flex flex-col items-center bg-[#050505] overflow-hidden">
+    <section className="relative w-full py-32 px-4 flex flex-col items-center bg-transparent overflow-hidden">
       <div className="max-w-6xl w-full z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
