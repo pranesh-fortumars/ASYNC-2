@@ -26,7 +26,7 @@ export function AnimatedText({ text, className = "", delay = 0 }: AnimatedTextPr
       y: 0,
       filter: "blur(0px)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
@@ -36,7 +36,7 @@ export function AnimatedText({ text, className = "", delay = 0 }: AnimatedTextPr
       y: 20,
       filter: "blur(10px)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
