@@ -131,11 +131,11 @@ export function HeroSection() {
           >
             {/* The actual image */}
             <div 
-              className="w-full h-full bg-contain bg-center bg-no-repeat drop-shadow-[0_0_30px_rgba(0,240,255,0.4)]"
+              className="w-full h-full bg-contain bg-center bg-no-repeat drop-shadow-[0_0_30px_rgba(0,240,255,0.4)] mix-blend-lighten"
               style={{ 
-                backgroundImage: `url('https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=2940&auto=format&fit=crop')`,
-                maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)"
+                backgroundImage: `url('/anime_tech_hero.png')`,
+                maskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
+                WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)"
               }}
             />
 
