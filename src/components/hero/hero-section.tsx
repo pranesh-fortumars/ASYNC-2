@@ -62,7 +62,7 @@ export function HeroSection() {
     { icon: Sparkles, text: "Problem Solver | Innovator | Tech Explorer", color: "text-[#4ade80]" },
   ];
 
-  const premiumGlass = "backdrop-blur-[10px] border border-[#00E5FF]/20 bg-[#050814]/40 hover:bg-[#050814]/60 transition-colors duration-500";
+  const premiumGlass = "backdrop-blur-[12px] border border-[#00E5FF]/20 bg-[#02040a]/80 hover:bg-[#000000]/95 transition-colors duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.5)]";
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#050814] font-mono" ref={constraintsRef}>
@@ -76,8 +76,8 @@ export function HeroSection() {
         style={{ backgroundImage: `url('/cyberpunk_developer_hero.png')` }}
       />
 
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#050814] via-[#050814]/80 to-transparent w-[65%]" />
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#050814]/90 via-transparent to-[#050814]/90 opacity-80" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#02040a] via-[#02040a]/90 to-transparent w-[65%]" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#02040a]/90 via-transparent to-[#02040a]/90 opacity-90" />
 
       {/* GLOBAL HUD FRAME */}
       <div className="absolute inset-3 lg:inset-6 z-10 border border-[#00E5FF]/20 pointer-events-none rounded-sm" />
@@ -127,7 +127,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="text-[14px] md:text-base text-gray-300 font-medium tracking-[0.4em] uppercase border-l-2 border-gray-500 pl-4"
+              className="text-[14px] md:text-base text-gray-300 font-medium tracking-[0.4em] uppercase border-l-2 border-gray-500 pl-4 bg-[#02040a]/60 pr-4 py-1 rounded-r-md backdrop-blur-sm"
             >
               | {titles[textIndex]} <motion.span animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }}>_</motion.span>
             </motion.p>
@@ -146,7 +146,7 @@ export function HeroSection() {
                 className="flex items-center gap-3 cursor-default"
               >
                 <role.icon className={`w-4 h-4 ${role.color} drop-shadow-[0_0_5px_currentColor]`} />
-                <span className={`text-[11px] md:text-xs font-semibold tracking-wider ${role.color}`}>{role.text}</span>
+                <span className={`text-[11px] md:text-xs font-semibold tracking-wider ${role.color} bg-[#02040a]/60 px-2 py-0.5 rounded backdrop-blur-sm`}>{role.text}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -167,7 +167,7 @@ export function HeroSection() {
             <motion.button 
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "#fff" }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-transparent border border-white/50 text-white text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 backdrop-blur-md rounded-full flex items-center gap-2"
+              className="px-8 py-3 bg-[#02040a]/80 border border-white/50 text-white text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 backdrop-blur-md rounded-full flex items-center gap-2 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             >
               VIEW PROJECTS &gt;
             </motion.button>
@@ -177,7 +177,7 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mb-6 w-[280px]"
+            className="mb-6 w-[280px] bg-[#02040a]/80 p-3 rounded-lg border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
           >
             <div className="flex items-center gap-3 mb-1">
               <span className="text-[9px] text-gray-400 tracking-[0.2em]">SYSTEM STATUS</span>
@@ -217,7 +217,7 @@ export function HeroSection() {
                 key={idx}
                 href="#" 
                 whileHover={{ scale: 1.1, y: -5, borderColor: "#00E5FF", color: "#00E5FF", boxShadow: "0 0 15px rgba(0,229,255,0.4)" }}
-                className="w-9 h-9 flex items-center justify-center border border-white/20 rounded-md transition-colors text-white/70"
+                className="w-9 h-9 flex items-center justify-center border border-white/20 bg-[#02040a]/80 backdrop-blur-md rounded-md transition-colors text-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
               >
                 {icon}
               </motion.a>
@@ -225,7 +225,7 @@ export function HeroSection() {
             <motion.button 
               whileHover={{ scale: 1.05, borderColor: "#00E5FF", color: "#00E5FF", boxShadow: "0 0 15px rgba(0,229,255,0.4)" }}
               whileTap={{ scale: 0.95 }}
-              className="h-9 px-5 ml-2 flex items-center justify-center gap-2 border border-white/20 rounded-md text-[10px] font-bold tracking-widest transition-colors text-white/70"
+              className="h-9 px-5 ml-2 flex items-center justify-center gap-2 border border-white/20 bg-[#02040a]/80 backdrop-blur-md rounded-md text-[10px] font-bold tracking-widest transition-colors text-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             >
               <Download className="w-3.5 h-3.5" />
               DOWNLOAD RESUME
@@ -242,7 +242,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9 }}
             whileHover={{ y: -5, boxShadow: "0 10px 30px -10px rgba(0,229,255,0.3)" }}
-            className={`w-full max-w-[340px] p-4 rounded-lg mb-6 border border-[#00E5FF]/30 bg-[#050814]/60 backdrop-blur-md cursor-default transition-all`}
+            className={`w-full max-w-[340px] p-4 rounded-lg mb-6 border border-[#00E5FF]/30 bg-[#02040a]/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] cursor-default transition-all`}
           >
             <div className="text-[9px] text-[#00E5FF] tracking-[0.2em] uppercase mb-3 flex items-center gap-2">
               <Activity className="w-3 h-3 animate-spin-slow" /> CURRENT FOCUS
@@ -263,18 +263,18 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1 }}
-            className={`w-full max-w-[340px] p-4 rounded-lg flex flex-col gap-3 border border-white/10 bg-[#050814]/60 backdrop-blur-md`}
+            className={`w-full max-w-[340px] p-4 rounded-lg flex flex-col gap-3 border border-white/10 bg-[#02040a]/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]`}
           >
              <span className="text-[9px] text-gray-400 tracking-[0.2em] border-b border-white/10 pb-2">TECH STACK (DRAGGABLE)</span>
              <div className="flex items-center justify-between">
               {[
-                { icon: <Code2 className="w-5 h-5" />, color: "text-[#00E5FF]" },
-                { icon: <Terminal className="w-5 h-5" />, color: "text-blue-400" },
-                { icon: <span className="text-[10px] font-black">JS</span>, color: "text-yellow-400" },
-                { icon: <span className="text-[10px] font-black">Py</span>, color: "text-blue-300" },
-                { icon: <Cloud className="w-5 h-5" />, color: "text-orange-400" },
-                { icon: <Database className="w-5 h-5" />, color: "text-blue-500" },
-                { icon: <Hexagon className="w-5 h-5" />, color: "text-gray-300" },
+                { icon: <Code2 className="w-5 h-5" />, color: "text-[#00E5FF]", rotate: -8 },
+                { icon: <Terminal className="w-5 h-5" />, color: "text-blue-400", rotate: 5 },
+                { icon: <span className="text-[10px] font-black">JS</span>, color: "text-yellow-400", rotate: -4 },
+                { icon: <span className="text-[10px] font-black">Py</span>, color: "text-blue-300", rotate: 7 },
+                { icon: <Cloud className="w-5 h-5" />, color: "text-orange-400", rotate: -6 },
+                { icon: <Database className="w-5 h-5" />, color: "text-blue-500", rotate: 9 },
+                { icon: <Hexagon className="w-5 h-5" />, color: "text-gray-300", rotate: -3 },
               ].map((tech, idx) => (
                 <motion.div 
                   key={idx}
@@ -282,7 +282,7 @@ export function HeroSection() {
                   dragConstraints={constraintsRef}
                   dragElastic={0.2}
                   whileDrag={{ scale: 1.5, zIndex: 50, cursor: "grabbing" }}
-                  whileHover={{ scale: 1.2, rotate: Math.random() * 20 - 10 }}
+                  whileHover={{ scale: 1.2, rotate: tech.rotate }}
                   className={`w-6 h-6 flex items-center justify-center ${tech.color} cursor-grab`}
                 >
                   {tech.icon}
@@ -422,17 +422,23 @@ export function HeroSection() {
              </div>
              <div className="relative w-[140px] h-[60px] opacity-80">
                 <Map className="w-full h-full text-[#00E5FF]/30" />
-                {[...Array(5)].map((_, i) => (
+                {[
+                  { top: "30%", left: "20%", duration: 2.5, delay: 0.2 },
+                  { top: "60%", left: "50%", duration: 3.1, delay: 1.5 },
+                  { top: "25%", left: "75%", duration: 2.8, delay: 0.8 },
+                  { top: "70%", left: "30%", duration: 3.5, delay: 1.1 },
+                  { top: "45%", left: "85%", duration: 2.2, delay: 0.5 }
+                ].map((node, i) => (
                   <motion.div 
                     key={i}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: [1, 2, 0], opacity: [1, 0, 0] }}
-                    transition={{ duration: 2 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
+                    transition={{ duration: node.duration, repeat: Infinity, delay: node.delay }}
                     className="absolute bg-[#00E5FF] rounded-full shadow-[0_0_5px_#00E5FF]"
                     style={{
                       width: 4, height: 4,
-                      top: `${20 + Math.random() * 60}%`,
-                      left: `${10 + Math.random() * 80}%`
+                      top: node.top,
+                      left: node.left
                     }}
                   />
                 ))}
