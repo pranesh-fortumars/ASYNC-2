@@ -141,6 +141,7 @@ export function HeroSection() {
             className="flex flex-wrap gap-4 mb-6"
           >
             <motion.button 
+              aria-label="Access System"
               whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0,229,255,0.6)" }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-3 bg-[#00E5FF] border border-[#00E5FF] text-black text-xs font-black tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.4)] rounded-full flex items-center gap-2"
@@ -148,6 +149,7 @@ export function HeroSection() {
               &gt; ACCESS SYSTEM
             </motion.button>
             <motion.button 
+              aria-label="View Projects"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)", borderColor: "#fff" }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-3 bg-[#02040a]/80 border border-white/50 text-white text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 backdrop-blur-md rounded-full flex items-center gap-2 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
@@ -199,6 +201,7 @@ export function HeroSection() {
               <motion.a 
                 key={idx}
                 href="#" 
+                aria-label={`Social link ${idx + 1}`}
                 whileHover={{ scale: 1.1, y: -5, borderColor: "#00E5FF", color: "#00E5FF", boxShadow: "0 0 15px rgba(0,229,255,0.4)" }}
                 className="w-9 h-9 flex items-center justify-center border border-white/20 bg-[#02040a]/80 backdrop-blur-md rounded-md transition-colors text-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
               >
@@ -206,6 +209,7 @@ export function HeroSection() {
               </motion.a>
             ))}
             <motion.button 
+              aria-label="Download Resume"
               whileHover={{ scale: 1.05, borderColor: "#00E5FF", color: "#00E5FF", boxShadow: "0 0 15px rgba(0,229,255,0.4)" }}
               whileTap={{ scale: 0.95 }}
               className="h-9 px-5 ml-2 flex items-center justify-center gap-2 border border-white/20 bg-[#02040a]/80 backdrop-blur-md rounded-md text-[10px] font-bold tracking-widest transition-colors text-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
