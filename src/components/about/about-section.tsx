@@ -3,15 +3,10 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { AnimatedText } from "@/components/ui/animated-text";
+import { aboutData } from "@/data/portfolio";
 
 export function AboutSection() {
   const containerRef = useRef<HTMLElement>(null);
-
-  const stats = [
-    { label: "Years Experience", value: "3+" },
-    { label: "Projects Completed", value: "20+" },
-    { label: "Certifications", value: "5+" },
-  ];
 
   return (
     <section
@@ -46,15 +41,9 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6 text-lg text-white/70 font-light"
           >
-            <p>
-              I am a passionate <strong className="text-white">Cybersecurity Engineer</strong> and <strong className="text-white">AI Developer</strong> dedicated to building secure, intelligent, and scalable digital solutions.
-            </p>
-            <p>
-              My journey began with a deep curiosity for how systems work, which evolved into a mission to protect them. I specialize in penetration testing, ethical hacking, and integrating AI to solve complex problems.
-            </p>
-            <p>
-              Beyond security, I love crafting immersive web experiences and exploring the potential of blockchain technology. I believe in writing code that is not only functional but also beautiful and secure by design.
-            </p>
+            {aboutData.story.map((paragraph, index) => (
+              <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
+            ))}
           </motion.div>
 
           {/* Stats & Cards */}
@@ -65,7 +54,7 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
-            {stats.map((stat, index) => (
+            {aboutData.stats.map((stat, index) => (
               <div
                 key={index}
                 className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group"
@@ -81,8 +70,8 @@ export function AboutSection() {
 
             <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 backdrop-blur-sm sm:col-span-2 flex items-center justify-between group cursor-pointer hover:border-primary/60 transition-colors">
               <div>
-                <h3 className="text-xl font-bold text-white mb-1">Download Resume</h3>
-                <p className="text-sm text-white/60">Get a detailed look at my experience.</p>
+                <h3 className="text-xl font-bold text-white mb-1">{aboutData.resumeBtn.title}</h3>
+                <p className="text-sm text-white/60">{aboutData.resumeBtn.subtitle}</p>
               </div>
               <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
                 &darr;

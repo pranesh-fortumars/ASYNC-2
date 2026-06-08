@@ -3,11 +3,11 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { 
-  ShieldCheck, BrainCircuit, Code, Hexagon, Sparkles, 
   Mouse, Terminal, Globe, 
   Database, Server, Cpu, Cloud, Code2,
-  Mail, Download, Activity, Map
+  Mail, Download, Activity, Map, Hexagon
 } from "lucide-react";
+import { heroData } from "@/data/portfolio";
 
 export function HeroSection() {
   const [textIndex, setTextIndex] = useState(0);
@@ -15,18 +15,10 @@ export function HeroSection() {
   const [typedCode, setTypedCode] = useState("");
   const constraintsRef = useRef(null);
 
-  const titles = [
-    "SOFTWARE DEVELOPER",
-    "CYBERSECURITY ENGINEER",
-    "AI & ML ENTHUSIAST",
-    "FULL STACK DEVELOPER",
-    "BLOCKCHAIN DEVELOPER"
-  ];
-
   // Title Cycler
   useEffect(() => {
     const interval = setInterval(() => {
-      setTextIndex((prev) => (prev + 1) % titles.length);
+      setTextIndex((prev) => (prev + 1) % heroData.titles.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -44,23 +36,14 @@ export function HeroSection() {
 
   // Terminal Typing Effect
   useEffect(() => {
-    const fullText = `const buildFuture = async () => {\n  await innovate();\n  await secure();\n  await scale();\n  return "Building Solutions";\n}`;
     let i = 0;
     const typeInterval = setInterval(() => {
-      setTypedCode(fullText.slice(0, i));
+      setTypedCode(heroData.codeTerminal.slice(0, i));
       i++;
-      if (i > fullText.length) clearInterval(typeInterval);
+      if (i > heroData.codeTerminal.length) clearInterval(typeInterval);
     }, 40);
     return () => clearInterval(typeInterval);
   }, []);
-
-  const rolesList = [
-    { icon: ShieldCheck, text: "Cybersecurity Engineer", color: "text-[#00E5FF]" },
-    { icon: BrainCircuit, text: "AI & ML Enthusiast", color: "text-[#b026ff]" },
-    { icon: Code, text: "Full Stack Developer", color: "text-[#ffaa00]" },
-    { icon: Hexagon, text: "Blockchain Developer", color: "text-[#00E5FF]" },
-    { icon: Sparkles, text: "Problem Solver | Innovator | Tech Explorer", color: "text-[#4ade80]" },
-  ];
 
   const premiumGlass = "backdrop-blur-[12px] border border-[#00E5FF]/20 bg-[#02040a]/80 hover:bg-[#000000]/95 transition-colors duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.5)]";
 
@@ -112,7 +95,7 @@ export function HeroSection() {
           >
             Hi, I'm <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#00E5FF] to-[#0077ff] drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]">
-              Pranesh S
+              {heroData.name}
             </span>
           </motion.h1>
 
@@ -129,7 +112,7 @@ export function HeroSection() {
               exit={{ opacity: 0, y: -10 }}
               className="text-[14px] md:text-base text-gray-300 font-medium tracking-[0.4em] uppercase border-l-2 border-gray-500 pl-4 bg-[#02040a]/60 pr-4 py-1 rounded-r-md backdrop-blur-sm"
             >
-              | {titles[textIndex]} <motion.span animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }}>_</motion.span>
+              | {heroData.titles[textIndex]} <motion.span animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }}>_</motion.span>
             </motion.p>
           </motion.div>
 
@@ -139,9 +122,9 @@ export function HeroSection() {
             transition={{ delay: 0.4 }}
             className="space-y-2.5 mb-8"
           >
-            {rolesList.map((role, i) => (
+            {heroData.roles.map((role) => (
               <motion.div 
-                key={i} 
+                key={role.id} 
                 whileHover={{ x: 10, scale: 1.05 }}
                 className="flex items-center gap-3 cursor-default"
               >
@@ -197,7 +180,7 @@ export function HeroSection() {
             </div>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-[#4ade80] rounded-full shadow-[0_0_5px_#4ade80] animate-pulse" />
-              <span className="text-[10px] text-[#4ade80] tracking-wider font-bold">All Systems Operational</span>
+              <span className="text-[10px] text-[#4ade80] tracking-wider font-bold">{heroData.systemStatus}</span>
             </div>
           </motion.div>
 
@@ -248,10 +231,9 @@ export function HeroSection() {
               <Activity className="w-3 h-3 animate-spin-slow" /> CURRENT FOCUS
             </div>
             <div className="space-y-1.5 text-[10px] text-[#00E5FF]/80">
-              <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.5 }}>&gt; Building Secure Applications...</motion.div>
-              <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.8 }}>&gt; Training AI Models...</motion.div>
-              <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.1 }}>&gt; Exploring Blockchain...</motion.div>
-              <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.4 }}>&gt; Learning New Technologies...</motion.div>
+              {heroData.focusAreas.map((area, idx) => (
+                <motion.div key={idx} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.5 + (idx * 0.3) }}>&gt; {area}</motion.div>
+              ))}
             </div>
             <div className="mt-4 flex justify-between text-[8px] text-gray-400 tracking-widest">
               <span>UPTIME: 100%</span>
@@ -333,15 +315,15 @@ export function HeroSection() {
             <div className="grid grid-cols-3 gap-2 mb-4 text-center">
               <div>
                 <div className="text-[8px] text-gray-400 uppercase tracking-widest">Total Repos</div>
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 1.5 }} className="text-sm text-white font-bold font-sans">48</motion.div>
+                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 1.5 }} className="text-sm text-white font-bold font-sans">{heroData.github.repos}</motion.div>
               </div>
               <div>
                 <div className="text-[8px] text-gray-400 uppercase tracking-widest">Commits</div>
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 1.6 }} className="text-sm text-white font-bold font-sans">1,245</motion.div>
+                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 1.6 }} className="text-sm text-white font-bold font-sans">{heroData.github.commits.toLocaleString()}</motion.div>
               </div>
               <div>
                 <div className="text-[8px] text-gray-400 uppercase tracking-widest">Contributions</div>
-                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 1.7 }} className="text-sm text-white font-bold font-sans">732</motion.div>
+                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 1.7 }} className="text-sm text-white font-bold font-sans">{heroData.github.contributions.toLocaleString()}</motion.div>
               </div>
             </div>
             <div className="flex flex-wrap gap-[3px] justify-center">
@@ -371,14 +353,7 @@ export function HeroSection() {
           >
             <div className="text-[9px] text-gray-300 tracking-widest mb-4 border-b border-white/10 pb-2 uppercase">SKILLS OVERVIEW</div>
             <div className="space-y-3">
-              {[
-                { name: "Frontend Development", value: 95 },
-                { name: "Backend Development", value: 93 },
-                { name: "Cybersecurity", value: 98 },
-                { name: "AI / ML", value: 92 },
-                { name: "DevOps", value: 90 },
-                { name: "Problem Solving", value: 99 },
-              ].map((skill, i) => (
+              {heroData.skills.map((skill, i) => (
                 <motion.div 
                   key={i} 
                   whileHover={{ x: 5 }}
