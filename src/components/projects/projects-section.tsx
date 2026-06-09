@@ -31,7 +31,15 @@ const projects = [
   },
 ];
 
-const ProjectCard = ({ project, index }: { project: any; index: number }) => {
+type Project = {
+  title: string;
+  description: string;
+  tech: string[];
+  image: string;
+  color: string;
+};
+
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const x = useMotionValue(0);

@@ -36,6 +36,7 @@ function Word({ children, position }: { children: string; position: THREE.Vector
 
   return (
     <Text
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={ref as any}
       onPointerOver={(e) => { e.stopPropagation(); setHovered(true); }}
       onPointerOut={() => setHovered(false)}

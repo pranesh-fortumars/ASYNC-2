@@ -46,7 +46,16 @@ const certifications = [
   },
 ];
 
-const TiltCard = ({ cert }: { cert: any }) => {
+type Cert = {
+  title: string;
+  issuer: string;
+  date: string;
+  icon: string;
+  color: string;
+  borderColor: string;
+};
+
+const TiltCard = ({ cert }: { cert: Cert }) => {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);

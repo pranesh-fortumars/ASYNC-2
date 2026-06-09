@@ -12,7 +12,7 @@ export async function GET() {
 
     const data = await res.json();
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     // If the external API fails (e.g. 429), return a successful 200 response with fallback data
     // This prevents the browser console from throwing a network error
     return NextResponse.json({

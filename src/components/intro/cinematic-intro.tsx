@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/purity, react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -7,6 +8,11 @@ export function CinematicIntro({ onComplete }: { onComplete: () => void }) {
   const [stage, setStage] = useState(0);
   const [isSkipped, setIsSkipped] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  const completeIntro = () => {
+    setIsSkipped(true);
+    setTimeout(onComplete, 1000); 
+  };
 
   useEffect(() => {
     // Key press to skip
@@ -57,11 +63,6 @@ export function CinematicIntro({ onComplete }: { onComplete: () => void }) {
       return () => clearInterval(interval);
     }
   }, [stage]);
-
-  const completeIntro = () => {
-    setIsSkipped(true);
-    setTimeout(onComplete, 1000); 
-  };
 
   return (
     <AnimatePresence>

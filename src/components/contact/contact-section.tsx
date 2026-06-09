@@ -42,7 +42,7 @@ export function ContactSection() {
             Initiate <span className="text-primary">Connection</span>
           </h2>
           <p className="text-white/60 mb-10 text-lg">
-            Whether you have a security challenge, an AI concept, or just want to connect, my inbox is always open. Let's build something secure and extraordinary.
+            Whether you have a security challenge, an AI concept, or just want to connect, my inbox is always open. Let&apos;s build something secure and extraordinary.
           </p>
 
           <div className="flex flex-col gap-6">

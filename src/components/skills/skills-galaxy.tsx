@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Sphere, Text, OrbitControls, Float, Line } from "@react-three/drei";
 import * as THREE from "three";
@@ -33,7 +33,14 @@ const skillCategories = [
   },
 ];
 
-function Planet({ data, onHover }: { data: any; onHover: (d: any | null) => void }) {
+type SkillCategory = {
+  name: string;
+  color: string;
+  position: [number, number, number];
+  skills: string[];
+};
+
+function Planet({ data, onHover }: { data: SkillCategory; onHover: (d: SkillCategory | null) => void }) {
   const ref = useRef<THREE.Mesh>(null);
   const [hovered, setHover] = useState(false);
 
@@ -48,7 +55,7 @@ function Planet({ data, onHover }: { data: any; onHover: (d: any | null) => void
             setHover(true);
             onHover(data);
           }}
-          onPointerOut={(e) => {
+          onPointerOut={() => {
             setHover(false);
             onHover(null);
           }}
@@ -74,7 +81,7 @@ function Planet({ data, onHover }: { data: any; onHover: (d: any | null) => void
   );
 }
 
-function Galaxy({ setHoveredData }: { setHoveredData: (d: any | null) => void }) {
+function Galaxy({ setHoveredData }: { setHoveredData: (d: SkillCategory | null) => void }) {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((state, delta) => {
@@ -117,7 +124,7 @@ function Galaxy({ setHoveredData }: { setHoveredData: (d: any | null) => void })
 }
 
 export function SkillsSection() {
-  const [hoveredData, setHoveredData] = useState<any | null>(null);
+  const [hoveredData, setHoveredData] = useState<SkillCategory | null>(null);
 
   return (
     <section id="skills" className="relative w-full min-h-screen bg-transparent py-20 flex flex-col items-center">
