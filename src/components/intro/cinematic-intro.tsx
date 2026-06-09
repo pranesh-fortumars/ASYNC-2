@@ -175,47 +175,71 @@ export function CinematicIntro({ onComplete }: { onComplete: () => void }) {
                     className="relative w-screen h-screen overflow-hidden"
                   >
                     {[
-                      { title: "Cybersecurity", top: "15%", left: "15%", delay: 0 },
-                      { title: "Artificial Intelligence", top: "25%", left: "80%", delay: 0.3 },
-                      { title: "Software Engineering", top: "85%", left: "75%", delay: 0.6 },
-                      { title: "Blockchain", top: "70%", left: "10%", delay: 0.9 },
-                      { title: "Cloud Computing", top: "50%", left: "45%", delay: 1.2 },
+                      { title: "Core Intelligence", top: "50%", left: "50%", delay: 0, isCore: true },
+                      { title: "Cybersecurity", top: "15%", left: "20%", delay: 0.3 },
+                      { title: "Artificial Intelligence", top: "25%", left: "80%", delay: 0.6 },
+                      { title: "Software Engineering", top: "85%", left: "75%", delay: 0.9 },
+                      { title: "Blockchain", top: "80%", left: "20%", delay: 1.2 },
                     ].map((node, i) => (
                       <motion.div 
                         key={i}
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: node.delay, type: "spring", stiffness: 100 }}
-                        className="absolute flex flex-col items-center gap-2"
+                        transition={{ delay: node.delay, type: "spring", stiffness: 80 }}
+                        className="absolute flex flex-col items-center gap-3 -translate-x-1/2 -translate-y-1/2"
                         style={{ top: node.top, left: node.left }}
                       >
-                        <div className="w-4 h-4 bg-[#00E5FF] rounded-full shadow-[0_0_30px_#00E5FF] animate-pulse" />
-                        <span className="text-[12px] md:text-sm tracking-[0.3em] uppercase text-white font-bold drop-shadow-[0_0_10px_#00E5FF]">{node.title}</span>
+                        <div className="relative flex items-center justify-center">
+                          {/* Rotating geometric border */}
+                          <motion.div 
+                            animate={{ rotate: node.isCore ? 360 : -360 }}
+                            transition={{ duration: node.isCore ? 4 : 8, repeat: Infinity, ease: "linear" }}
+                            className={`absolute ${node.isCore ? 'w-16 h-16 border-2' : 'w-8 h-8 border'} border-[#00E5FF]/40 rounded-sm`}
+                            style={{ rotate: '45deg' }}
+                          />
+                          <motion.div 
+                            animate={{ rotate: node.isCore ? -360 : 360 }}
+                            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                            className={`absolute ${node.isCore ? 'w-12 h-12' : 'w-6 h-6'} border border-[#4ade80]/30 rounded-full`}
+                          />
+                          {/* Inner glowing dot */}
+                          <div className={`bg-[#00E5FF] rounded-full shadow-[0_0_25px_#00E5FF] animate-pulse ${node.isCore ? 'w-4 h-4' : 'w-2 h-2'}`} />
+                        </div>
+                        <span className={`text-[10px] md:text-xs tracking-[0.3em] uppercase text-white/90 font-bold drop-shadow-[0_0_8px_#00E5FF] text-center ${node.isCore ? 'w-48 text-[#00E5FF]' : 'w-32'}`}>
+                          {node.title}
+                        </span>
                       </motion.div>
                     ))}
                     
-                    {/* SVG Links */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none stroke-[#00E5FF]/40 stroke-dashed">
-                      <motion.line 
-                        x1="15%" y1="15%" x2="80%" y2="25%" strokeWidth="2"
-                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.4, duration: 1 }}
-                      />
-                      <motion.line 
-                        x1="80%" y1="25%" x2="45%" y2="50%" strokeWidth="2"
-                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.7, duration: 1 }}
-                      />
-                      <motion.line 
-                        x1="45%" y1="50%" x2="75%" y2="85%" strokeWidth="2"
-                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1.0, duration: 1 }}
-                      />
-                      <motion.line 
-                        x1="45%" y1="50%" x2="10%" y2="70%" strokeWidth="2"
-                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1.3, duration: 1 }}
-                      />
-                      <motion.line 
-                        x1="10%" y1="70%" x2="15%" y2="15%" strokeWidth="2"
-                        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1.6, duration: 1 }}
-                      />
+                    {/* Advanced SVG Network Links */}
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none stroke-[#00E5FF]/30">
+                      {/* Lines from Core to outer nodes */}
+                      {[
+                        { x2: "20%", y2: "15%" },
+                        { x2: "80%", y2: "25%" },
+                        { x2: "75%", y2: "85%" },
+                        { x2: "20%", y2: "80%" },
+                      ].map((line, i) => (
+                        <g key={`core-link-${i}`}>
+                          <motion.line 
+                            x1="50%" y1="50%" x2={line.x2} y2={line.y2} strokeWidth="1" strokeDasharray="5 5"
+                            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.5 + (i * 0.2), duration: 1.5 }}
+                          />
+                          {/* Animated Data Packets shooting from core */}
+                          <motion.circle 
+                            r="2" fill="#fff" className="shadow-[0_0_10px_white]"
+                            initial={{ cx: "50%", cy: "50%", opacity: 0 }}
+                            animate={{ cx: line.x2, cy: line.y2, opacity: [0, 1, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity, delay: 1 + i * 0.5, ease: "linear" }}
+                          />
+                        </g>
+                      ))}
+                      
+                      {/* Thin Perimeter Connections */}
+                      <motion.line x1="20%" y1="15%" x2="80%" y2="25%" strokeWidth="0.5" stroke="rgba(0,229,255,0.15)" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1.5, duration: 1 }} />
+                      <motion.line x1="80%" y1="25%" x2="75%" y2="85%" strokeWidth="0.5" stroke="rgba(0,229,255,0.15)" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1.8, duration: 1 }} />
+                      <motion.line x1="75%" y1="85%" x2="20%" y2="80%" strokeWidth="0.5" stroke="rgba(0,229,255,0.15)" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 2.1, duration: 1 }} />
+                      <motion.line x1="20%" y1="80%" x2="20%" y2="15%" strokeWidth="0.5" stroke="rgba(0,229,255,0.15)" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 2.4, duration: 1 }} />
                     </svg>
                   </motion.div>
                 )}
@@ -232,30 +256,30 @@ export function CinematicIntro({ onComplete }: { onComplete: () => void }) {
                 exit={{ opacity: 0 }}
                 className="absolute inset-0 flex items-center justify-center overflow-hidden"
               >
-                <div className="absolute inset-0 bg-black z-[-1]" />
+                <div className="absolute inset-0 bg-[#02040a] z-[-1]" />
                 <motion.div 
-                  initial={{ scale: 1 }}
-                  animate={{ scale: 3 }}
+                  initial={{ scale: 0.5, rotate: 0 }}
+                  animate={{ scale: 3, rotate: 180 }}
                   transition={{ duration: 3.5, ease: "easeIn" }}
-                  className="w-full h-full relative"
+                  className="w-full h-full relative perspective-[1000px]"
                 >
-                  {[...Array(40)].map((_, i) => (
+                  {[...Array(60)].map((_, i) => (
                     <motion.div 
                       key={i}
-                      className="absolute bg-gradient-to-b from-[#00E5FF] to-transparent rounded-full opacity-50 blur-[2px]"
+                      className="absolute bg-gradient-to-b from-white via-[#00E5FF] to-transparent rounded-full opacity-60"
                       style={{
-                        width: Math.random() * 4 + 2,
-                        height: Math.random() * 200 + 50,
+                        width: Math.random() * 2 + 1,
+                        height: Math.random() * 250 + 50,
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
-                        transform: `scale(${Math.random() * 2 + 1})`
                       }}
                       animate={{
-                        y: [0, 1000],
+                        scaleY: [0, 2, 0],
+                        y: [-200, 1500],
                         opacity: [0, 1, 0]
                       }}
                       transition={{
-                        duration: Math.random() * 1 + 0.5,
+                        duration: Math.random() * 0.8 + 0.3,
                         repeat: Infinity,
                         ease: "linear"
                       }}
