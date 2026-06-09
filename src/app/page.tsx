@@ -1,3 +1,7 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { CinematicIntro } from "@/components/intro/cinematic-intro";
 import { Navbar } from "@/components/navigation/navbar";
 import { HeroSection } from "@/components/hero/hero-section";
 import { DevMetricsSection } from "@/components/metrics/dev-metrics";
@@ -21,30 +25,47 @@ const MindGraphSection = dynamic(() => import("@/components/mind/mind-graph").th
 const ContactSection = dynamic(() => import("@/components/contact/contact-section").then(mod => mod.ContactSection));
 
 export default function Home() {
+  const [isIntroComplete, setIsIntroComplete] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null; // Prevent hydration mismatch
+
   return (
     <>
-      <PageLoader />
-      <AiTerminal />
-      <main className="relative min-h-screen flex flex-col bg-transparent text-white selection:bg-primary/30 overflow-x-hidden">
-        <ParticleBackground />
-        <Navbar />
-        
-        <HeroSection />
-        <DevMetricsSection />
-        <AboutSection />
-        <GithubAnalytics />
-        <TechEcosystemSection />
-        <SystemDesignSection />
-        <SkillsSection />
-        <CyberLabSection />
-        <ExperienceSection />
-        <CertificationsSection />
-        <ProjectsSection />
-        <TechSphereSection />
-        <AchievementsSection />
-        <MindGraphSection />
-        <ContactSection />
-      </main>
+      {!isIntroComplete && (
+        <CinematicIntro onComplete={() => setIsIntroComplete(true)} />
+      )}
+      
+      {isIntroComplete && (
+        <>
+          <PageLoader />
+          <AiTerminal />
+          <main className="relative min-h-screen flex flex-col bg-transparent text-white selection:bg-primary/30 overflow-x-hidden">
+            <ParticleBackground />
+            <Navbar />
+            
+            <HeroSection />
+            <DevMetricsSection />
+            <AboutSection />
+            <GithubAnalytics />
+            <TechEcosystemSection />
+            <SystemDesignSection />
+            <SkillsSection />
+            <CyberLabSection />
+            <ExperienceSection />
+            <CertificationsSection />
+            <ProjectsSection />
+            <TechSphereSection />
+            <AchievementsSection />
+            <MindGraphSection />
+            <ContactSection />
+          </main>
+        </>
+      )}
     </>
   );
 }
