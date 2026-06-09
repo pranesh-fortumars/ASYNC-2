@@ -19,16 +19,16 @@ export function CinematicIntro({ onComplete }: { onComplete: () => void }) {
     let currentTimeout: NodeJS.Timeout;
     const runSequence = async () => {
       const stages = [
-        { id: 1, delay: 1000 }, // Black screen initialization
-        { id: 2, delay: 1800 }, // AI Core Activation
-        { id: 3, delay: 1200 }, // Digital Universe
-        { id: 4, delay: 1800 }, // Constellations
-        { id: 5, delay: 1800 }, // Cinematic City Flight
-        { id: 6, delay: 1500 }, // Character Materialization
-        { id: 7, delay: 1500 }, // Workspace
-        { id: 8, delay: 1200 }, // Name Reveal
-        { id: 9, delay: 2000 }, // Role Morphing
-        { id: 10, delay: 800 }  // Fade Out
+        { id: 1, delay: 1500 }, // Black screen initialization
+        { id: 2, delay: 2500 }, // AI Core Activation
+        { id: 3, delay: 1800 }, // Digital Universe
+        { id: 4, delay: 2500 }, // Constellations
+        { id: 5, delay: 2500 }, // Cinematic City Flight
+        { id: 6, delay: 2200 }, // Identity Verification
+        { id: 7, delay: 2000 }, // Workspace
+        { id: 8, delay: 1800 }, // Name Reveal
+        { id: 9, delay: 2500 }, // Role Morphing
+        { id: 10, delay: 1000 }  // Fade Out
       ];
 
       for (const s of stages) {
