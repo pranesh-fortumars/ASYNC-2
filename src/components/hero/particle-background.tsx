@@ -5,6 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import { motion } from "framer-motion";
+import { Code2, Database, Terminal } from "lucide-react";
 
 function StarfieldParticles() {
   const ref = useRef<THREE.Points>(null);
@@ -93,6 +94,46 @@ const AnimeEnergyParticles = () => {
   );
 };
 
+// Layer 8: Floating Holograms (Software Engineer Identity)
+const FloatingHolograms = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-[6] perspective-[1000px]">
+      {[
+        { icon: <Code2 />, size: 40, x: "10%", y: "20%", duration: 15, delay: 0 },
+        { icon: <Database />, size: 30, x: "85%", y: "15%", duration: 18, delay: 2 },
+        { icon: <Terminal />, size: 35, x: "80%", y: "70%", duration: 20, delay: 5 },
+        { text: "{ API: REST }", size: 14, x: "15%", y: "60%", duration: 12, delay: 1 },
+        { text: "const app = next()", size: 12, x: "70%", y: "40%", duration: 25, delay: 4 },
+      ].map((item, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 100, rotateX: 45, rotateY: 45 }}
+          animate={{ 
+            opacity: [0, 0.4, 0],
+            y: -100,
+            rotateX: [45, -45],
+            rotateY: [45, 90]
+          }}
+          transition={{
+            duration: item.duration,
+            repeat: Infinity,
+            delay: item.delay,
+            ease: "linear"
+          }}
+          className="absolute text-[#00E5FF] blur-[1px] opacity-30 font-mono tracking-widest font-bold"
+          style={{ 
+            left: item.x, 
+            top: item.y,
+            fontSize: item.size
+          }}
+        >
+          {item.icon || item.text}
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
 export function ParticleBackground() {
   return (
     <div className="fixed inset-0 w-full h-full bg-transparent z-[-1] overflow-hidden pointer-events-none">
@@ -107,9 +148,10 @@ export function ParticleBackground() {
 
       <CyberGrid />
       <AnimeEnergyParticles />
+      <FloatingHolograms />
       
       {/* Matrix Overlay Mask to darken the edges */}
-      <div className="absolute inset-0 z-[5] bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] pointer-events-none" />
+      <div className="absolute inset-0 z-[7] bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] pointer-events-none" />
     </div>
   );
 }

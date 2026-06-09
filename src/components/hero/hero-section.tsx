@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { 
   Mouse, Terminal, Globe, 
@@ -14,6 +14,28 @@ export function HeroSection() {
   const [visitors, setVisitors] = useState(126);
   const [typedCode, setTypedCode] = useState("");
   const constraintsRef = useRef(null);
+
+  // Parallax Mouse Tracking
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 150 };
+  const smoothMouseX = useSpring(mouseX, springConfig);
+  const smoothMouseY = useSpring(mouseY, springConfig);
+
+  const backgroundX = useTransform(smoothMouseX, [-0.5, 0.5], ["-3%", "3%"]);
+  const backgroundY = useTransform(smoothMouseY, [-0.5, 0.5], ["-3%", "3%"]);
+  const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], [5, -5]);
+  const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-5, 5]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    const x = clientX / innerWidth - 0.5;
+    const y = clientY / innerHeight - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
 
   // Title Cycler
   useEffect(() => {
@@ -45,18 +67,37 @@ export function HeroSection() {
     return () => clearInterval(typeInterval);
   }, []);
 
-  const premiumGlass = "backdrop-blur-[12px] border border-[#00E5FF]/20 bg-[#02040a]/80 hover:bg-[#000000]/95 transition-colors duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.5)]";
+  const premiumGlass = "relative overflow-hidden backdrop-blur-2xl border border-[#00E5FF]/30 bg-[#02040a]/70 hover:bg-[#000000]/90 transition-all duration-500 shadow-[inset_0_0_20px_rgba(0,229,255,0.05),0_8px_32px_rgba(0,0,0,0.8)] hover:shadow-[inset_0_0_30px_rgba(0,229,255,0.1),0_10px_40px_rgba(0,229,255,0.15)] group";
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#050814] font-mono" ref={constraintsRef}>
+    <section 
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#050814] font-mono" 
+      ref={constraintsRef}
+      onMouseMove={handleMouseMove}
+      style={{ perspective: "1000px" }}
+    >
       
-      {/* Background Image */}
+      {/* Background Image with Pseudo-3D Parallax, Breathing, and Soft Edge Masking */}
       <motion.div 
         initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute inset-0 z-0 bg-[length:100%_100%] md:bg-contain lg:bg-[length:80%_auto] bg-[position:right_center] bg-no-repeat"
-        style={{ backgroundImage: `url('/cyberpunk_developer_hero.png')` }}
+        animate={{ 
+          scale: [1, 1.02, 1], 
+          opacity: 1 
+        }}
+        transition={{ 
+          scale: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          opacity: { duration: 1.5, ease: "easeOut" }
+        }}
+        className="absolute inset-0 z-0 bg-[length:100%_100%] md:bg-[length:100%_auto] lg:bg-[length:80%_auto] bg-[position:bottom_right] md:bg-[position:right_center] bg-no-repeat pointer-events-none"
+        style={{ 
+          backgroundImage: `url('/cyberpunk_developer_hero.png')`,
+          x: backgroundX,
+          y: backgroundY,
+          rotateX,
+          rotateY,
+          WebkitMaskImage: "radial-gradient(circle at 75% 50%, black 35%, transparent 75%)",
+          maskImage: "radial-gradient(circle at 75% 50%, black 35%, transparent 75%)"
+        }}
       />
 
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#02040a] via-[#02040a]/90 to-transparent w-[65%]" />
@@ -300,10 +341,11 @@ export function HeroSection() {
               </div>
             </div>
             <div className="text-[10px] text-[#00E5FF] mb-2 font-medium tracking-wide">
-              Pranesh@DevSystem:~$ <motion.span animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} className="w-2 h-3 bg-white inline-block align-middle" />
+              Pranesh@DevSystem:~$ 
             </div>
             <pre className="text-[10px] leading-relaxed whitespace-pre-wrap text-gray-300 h-[70px]">
               {typedCode}
+              <motion.span animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} className="w-2 h-3 bg-white inline-block align-middle ml-1" />
             </pre>
           </motion.div>
 
@@ -341,7 +383,7 @@ export function HeroSection() {
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 1.2 + (i * 0.005) }}
-                    whileHover={{ scale: 1.8, zIndex: 10, boxShadow: "0 0 10px #39d353" }}
+                    whileHover={{ scale: 2.2, zIndex: 10, boxShadow: "0 0 15px #39d353", borderRadius: "50%" }}
                     className={`w-[10px] h-[10px] rounded-[2px] ${colorClass} cursor-crosshair relative`} 
                   />
                 );
@@ -369,7 +411,7 @@ export function HeroSection() {
                       initial={{ width: 0 }}
                       animate={{ width: `${skill.value}%` }}
                       transition={{ duration: 1.5, delay: 1.5 + (i * 0.1), ease: "easeOut" }}
-                      className="absolute left-0 top-0 h-full bg-[#00E5FF] group-hover:shadow-[0_0_10px_#00E5FF]"
+                      className="absolute left-0 top-0 h-full bg-[#00E5FF] group-hover:shadow-[0_0_15px_#00E5FF] group-hover:bg-white transition-colors"
                     />
                   </div>
                   <div className="text-[9px] text-white w-6 text-right font-medium group-hover:text-[#00E5FF]">{skill.value}%</div>
