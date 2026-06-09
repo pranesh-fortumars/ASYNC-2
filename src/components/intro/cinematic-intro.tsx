@@ -80,27 +80,39 @@ export function CinematicIntro({ onComplete }: { onComplete: () => void }) {
             Press Space to Skip
           </button>
 
-          {/* STAGE 1: BLACK SCREEN & PARTICLE */}
+          {/* STAGE 1: HEX DECRYPTION BOOT */}
           <AnimatePresence>
             {stage === 1 && (
               <motion.div 
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: [0, 1, 10], opacity: [0, 1, 0] }}
-                transition={{ duration: 2, ease: "easeIn" }}
-                className="w-2 h-2 bg-[#00E5FF] rounded-full shadow-[0_0_20px_#00E5FF]"
-              />
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {stage === 1 && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute text-[10px] tracking-widest text-[#00E5FF]/50"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                className="absolute inset-0 flex flex-col items-center justify-center font-mono overflow-hidden"
               >
-                BOOTING SYSTEM...
+                {/* Background random code streams */}
+                <div className="absolute inset-0 opacity-20 flex flex-wrap gap-2 text-[8px] text-[#00E5FF] p-4">
+                  {[...Array(200)].map((_, i) => (
+                    <motion.span 
+                      key={i} animate={{ opacity: [0, 1, 0] }} 
+                      transition={{ duration: Math.random() * 0.5 + 0.1, repeat: Infinity }}
+                    >
+                      {Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0').toUpperCase()}
+                    </motion.span>
+                  ))}
+                </div>
+                {/* Laser Scan */}
+                <motion.div 
+                  initial={{ top: "0%" }} animate={{ top: "100%" }} transition={{ duration: 1.5, ease: "linear" }}
+                  className="absolute left-0 w-full h-[2px] bg-[#00E5FF] shadow-[0_0_30px_#00E5FF] z-10"
+                />
+                {/* Main Boot Text */}
+                <div className="z-20 text-[#00E5FF] text-xs md:text-sm tracking-[0.5em] flex flex-col items-center gap-4 bg-[#02040a]/80 p-6 rounded backdrop-blur-sm border border-[#00E5FF]/20">
+                  <motion.div animate={{ opacity: [0, 1, 0, 1, 1] }} transition={{ duration: 1, times: [0, 0.2, 0.4, 0.6, 1] }}>
+                    &gt; KERNEL_DECRYPTION_INIT
+                  </motion.div>
+                  <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 1 }} className="h-[1px] bg-[#00E5FF]/50" />
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="text-white drop-shadow-[0_0_10px_white] font-bold">
+                    BOOTING SYSTEM...
+                  </motion.div>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -174,8 +186,40 @@ export function CinematicIntro({ onComplete }: { onComplete: () => void }) {
                 transition={{ duration: 1.5 }}
                 className="absolute inset-0 flex items-center justify-center"
               >
-                {/* Background Grid */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(0,229,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,229,255,0.1)_1px,transparent_1px)] bg-[size:50px_50px] [transform:perspective(500px)_rotateX(60deg)] animate-[grid-scroll_10s_linear_infinite]" />
+                {/* Orbital Galaxy (Stage 3 & 4 Background) */}
+                <div className="absolute inset-0 flex items-center justify-center perspective-[1200px]">
+                  <motion.div 
+                    initial={{ rotateX: 70, rotateZ: 0 }} 
+                    animate={{ rotateZ: 360 }} 
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    className="relative w-[800px] h-[800px] md:w-[1200px] md:h-[1200px] preserve-3d"
+                  >
+                    {/* Inner Black Hole Core */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#02040a] rounded-full shadow-[0_0_80px_#00E5FF] border border-[#00E5FF]/20" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-2 border-dashed border-[#00E5FF]/30 rounded-full animate-[spin_10s_linear_infinite]" />
+                    
+                    {/* Orbiting Galaxy Particles */}
+                    {[...Array(150)].map((_, i) => {
+                      const radius = 150 + Math.random() * 400;
+                      const angle = Math.random() * Math.PI * 2;
+                      const size = Math.random() * 4 + 1;
+                      return (
+                        <motion.div 
+                          key={`galaxy-node-${i}`} 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: [0, 1, 0.2, 1] }}
+                          transition={{ duration: Math.random() * 2 + 1, repeat: Infinity }}
+                          className="absolute bg-[#00E5FF] rounded-full shadow-[0_0_15px_#00E5FF]"
+                          style={{
+                            width: size, height: size,
+                            left: '50%', top: '50%',
+                            transform: `translate(-50%, -50%) rotate(${angle}rad) translateX(${radius}px)`
+                          }}
+                        />
+                      );
+                    })}
+                  </motion.div>
+                </div>
                 
                 {stage === 4 && (
                   <motion.div 
@@ -453,15 +497,33 @@ export function CinematicIntro({ onComplete }: { onComplete: () => void }) {
                 exit={{ opacity: 0, scale: 1.1 }}
                 className="absolute inset-0 flex flex-col items-center justify-center gap-6"
               >
-                {/* Particle Name Assembly */}
-                <motion.h1 
-                  initial={{ filter: "blur(20px)", letterSpacing: "1em" }}
-                  animate={{ filter: "blur(0px)", letterSpacing: "0.1em" }}
-                  transition={{ duration: 2, ease: "easeOut" }}
-                  className="text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-[#00E5FF] to-white"
-                >
-                  PRANESH S
-                </motion.h1>
+                {/* Extreme RGB Glitch Name Assembly */}
+                <div className="relative text-5xl md:text-8xl font-black uppercase tracking-[0.1em] h-32 flex items-center justify-center">
+                  <motion.h1 
+                    initial={{ x: -100, opacity: 0, clipPath: "inset(0% 0% 50% 0%)" }}
+                    animate={{ x: [ -100, 30, -10, 0 ], opacity: 1, clipPath: ["inset(0% 0% 50% 0%)", "inset(20% 0% 30% 0%)", "inset(0% 0% 0% 0%)"] }}
+                    transition={{ duration: 1.5, ease: "circOut" }}
+                    className="absolute text-red-500 mix-blend-screen"
+                  >
+                    PRANESH S
+                  </motion.h1>
+                  <motion.h1 
+                    initial={{ x: 100, opacity: 0, clipPath: "inset(50% 0% 0% 0%)" }}
+                    animate={{ x: [ 100, -30, 10, 0 ], opacity: 1, clipPath: ["inset(50% 0% 0% 0%)", "inset(30% 0% 20% 0%)", "inset(0% 0% 0% 0%)"] }}
+                    transition={{ duration: 1.5, ease: "circOut" }}
+                    className="absolute text-[#00E5FF] mix-blend-screen"
+                  >
+                    PRANESH S
+                  </motion.h1>
+                  <motion.h1 
+                    initial={{ scale: 1.5, filter: "blur(20px)", opacity: 0 }}
+                    animate={{ scale: 1, filter: "blur(0px)", opacity: 1 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className="relative text-white drop-shadow-[0_0_20px_white]"
+                  >
+                    PRANESH S
+                  </motion.h1>
+                </div>
 
                 {/* Role Morphing */}
                 {stage === 9 && (
