@@ -5,6 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Sphere, Text, OrbitControls, Float, Line } from "@react-three/drei";
 import * as THREE from "three";
 import { motion } from "framer-motion";
+import { InViewWrapper } from "@/components/layout/in-view-wrapper";
 
 const skillCategories = [
   {
@@ -143,10 +144,12 @@ export function SkillsSection() {
       </div>
 
       <div className="w-full h-[600px] relative">
-        <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
-          <OrbitControls enableZoom={false} enablePan={false} autoRotate={false} />
-          <Galaxy setHoveredData={setHoveredData} />
-        </Canvas>
+        <InViewWrapper>
+          <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
+            <OrbitControls enableZoom={false} enablePan={false} autoRotate={false} />
+            <Galaxy setHoveredData={setHoveredData} />
+          </Canvas>
+        </InViewWrapper>
 
         {/* Info Panel Overlay */}
         {hoveredData && (

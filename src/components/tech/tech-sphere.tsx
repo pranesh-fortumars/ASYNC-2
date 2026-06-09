@@ -5,6 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Text, TrackballControls } from "@react-three/drei";
 import * as THREE from "three";
 import { motion } from "framer-motion";
+import { InViewWrapper } from "@/components/layout/in-view-wrapper";
 
 const technologies = [
   "React", "Next.js", "Python", "Java", "AWS", "Docker", "Linux", 
@@ -123,12 +124,14 @@ export function TechSphereSection() {
         </motion.div>
 
         <div className="w-full md:w-2/3 h-[500px] md:h-[600px] cursor-grab active:cursor-grabbing">
-          <Canvas camera={{ position: [0, 0, 15], fov: 60 }}>
-            <fog attach="fog" args={['#000000', 10, 25]} />
-            <ambientLight intensity={1} />
-            <Cloud count={technologies.length} radius={7} />
-            <TrackballControls noPan noZoom rotateSpeed={2} />
-          </Canvas>
+          <InViewWrapper>
+            <Canvas camera={{ position: [0, 0, 15], fov: 60 }}>
+              <fog attach="fog" args={['#000000', 10, 25]} />
+              <ambientLight intensity={1} />
+              <Cloud count={technologies.length} radius={7} />
+              <TrackballControls noPan noZoom rotateSpeed={2} />
+            </Canvas>
+          </InViewWrapper>
         </div>
       </div>
     </section>
