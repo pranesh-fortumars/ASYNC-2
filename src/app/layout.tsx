@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://pranesh-s-portfolio.com'),
   title: "Pranesh S | Cybersecurity Engineer & AI Developer",
   description: "Portfolio of Pranesh S - Cybersecurity Engineer, AI Developer, Full Stack Developer, and Blockchain Enthusiast.",
   keywords: ["Pranesh S", "Cybersecurity", "AI Developer", "Next.js", "React", "Portfolio", "Ethical Hacking", "Full Stack"],

@@ -3,6 +3,8 @@ import { HeroSection } from "@/components/hero/hero-section";
 import { DevMetricsSection } from "@/components/metrics/dev-metrics";
 import { ParticleBackground } from "@/components/hero/particle-background";
 import { AboutSection } from "@/components/about/about-section";
+import { PageLoader } from "@/components/layout/page-loader";
+import { AiTerminal } from "@/components/terminal/ai-terminal";
 import dynamic from "next/dynamic";
 
 const GithubAnalytics = dynamic(() => import("@/components/github/github-analytics").then(mod => mod.GithubAnalytics));
@@ -17,8 +19,6 @@ const TechSphereSection = dynamic(() => import("@/components/tech/tech-sphere").
 const AchievementsSection = dynamic(() => import("@/components/achievements/achievements-section").then(mod => mod.AchievementsSection));
 const MindGraphSection = dynamic(() => import("@/components/mind/mind-graph").then(mod => mod.MindGraphSection));
 const ContactSection = dynamic(() => import("@/components/contact/contact-section").then(mod => mod.ContactSection));
-import { PageLoader } from "@/components/layout/page-loader";
-import { AiTerminal } from "@/components/terminal/ai-terminal";
 
 export default function Home() {
   return (
