@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright" />
 </p>
 
-### ✦ Cybersecurity Engineer ✦ AI Developer ✦ Full Stack Developer ✦
+### ✦ Full Stack Software Developer ✦ System Architect ✦ Cybersecurity Engineer ✦
 
 > *Building the future of secure, intelligent, and scalable digital solutions.*
 
@@ -22,7 +22,7 @@
 
 ## 🚀 SYSTEM OVERVIEW
 
-Welcome to the **Digital Universe**, a high-performance, interactive 3D developer portfolio. Engineered with a dark, cyberpunk-inspired aesthetic, this repository serves as a technical playground demonstrating advanced frontend architecture, CI/CD automation, and seamless third-party data integrations.
+Welcome to the **Digital Universe**, a high-performance, interactive 3D developer portfolio. Engineered with a dark, Anime-Tech and cyberpunk-inspired aesthetic, this repository serves as a technical playground demonstrating advanced frontend architecture, CI/CD automation, seamless third-party data integrations, and enterprise system design capabilities.
 
 Unlike traditional static portfolios, this project acts as a **living, breathing digital interface**.
 
@@ -30,25 +30,31 @@ Unlike traditional static portfolios, this project acts as a **living, breathing
 
 ## 🌟 CORE ARCHITECTURE & FEATURES
 
-### 🎬 The Boot Sequence
-- **10-Stage Cinematic BootLoader:** Simulates a system startup featuring hex decryption matrices, a 3D orbital galaxy, RGB typography glitch effects, and AI core initialization using Framer Motion orchestrations.
+### 🎬 The Boot Sequence & Cinematic Scrolling
+- **Cinematic BootLoader:** Simulates a system startup featuring hex decryption matrices and a loading sequence before seamlessly transitioning into the global UI.
+- **7-Layer Matrix Aurora Background:** A deeply layered, globally fixed background featuring rotating starfields, glowing auroras, and matrix grids that provides a stunning parallax effect across every section of the site.
 
 ### 🌌 3D Environments & WebGL rendering
 - **Interactive Particle Universe:** An immersive background utilizing `react-three-fiber` mapped to user mouse coordinates.
 - **Skills Galaxy:** A mathematically calculated 3D orbital system categorizing technical expertise into interactive celestial bodies.
 - **Tech Sphere:** A constantly rotating, dynamic tag cloud of core technologies rendered natively on the canvas.
 
+### 🏛️ System Architect Ecosystem
+- **Tech Ecosystem Universe:** Visualizes the full stack (Frontend, Backend, Database, Cloud, Security, AI) with animated SVG data flows running between the layers.
+- **Enterprise System Design Map:** An interactive network architecture map showing Client -> API Gateway -> Microservices -> DB data flows with moving, glowing packets.
+- **Dev Command Center:** A futuristic metric dashboard showing live, animated counters for Applications Developed, APIs Built, Projects Delivered, and more.
+
 ### 📡 Live Telemetry & Data Integration
 - **GitHub Analytics Engine:** Pulls real-time commit history, repository data, and contribution graphs directly via the GitHub API.
-- **LeetCode Integration:** Displays dynamic competitive programming stats and acceptance rates via custom API routing mechanisms.
+- **LeetCode Integration:** Displays dynamic competitive programming stats and acceptance rates via custom API routing mechanisms with robust fallback states.
 
 ### 🔐 Hidden Easter Eggs
-- **Awakening Mode:** A hidden, hyper-drive aesthetic overlay triggered securely by an integrated custom hook (`useKonamiCode`), flooding the UI with matrix-style effects and unlocking advanced visual states.
+- **Solo Leveling "Awakening" Mode:** A hidden, hyper-drive aesthetic overlay triggered securely by the Konami Code (`↑ ↑ ↓ ↓ ← → ← → B A`), plunging the screen into darkness and triggering a massive "SYSTEM AWAKENED" holographic alert.
 - **Terminal Simulator:** An interactive AI command-line interface capable of parsing user queries and triggering system events.
 
 ### 🚀 Performance & Interactivity
 - **Lenis Smooth Scrolling:** Implements frictionless, physics-based vertical scrolling across the entire Next.js App Router tree.
-- **Micro-Interactions:** Magnetic buttons, tilt-cards relying on `useMotionValue`, and extensive glassmorphism shading.
+- **Magnetic Intelligent Cursor:** A custom-built cursor that magnetically snaps to interactive elements, featuring collision detection and scale animations.
 
 ---
 
@@ -100,7 +106,7 @@ npx playwright test
 | :--- | :--- | :--- |
 | **Framework** | `Next.js 15` | Core React framework leveraging App Router & Server Components. |
 | **Styling** | `Tailwind CSS v4` | Utility-first styling with a custom cyberpunk hex theme. |
-| **Animations** | `Framer Motion` | Complex UI transitions, sequenced mounting, and gesture hooks. |
+| **Animations** | `Framer Motion` | Complex UI transitions, SVG path animations, and layout reveals. |
 | **3D Graphics** | `Three.js` & `R3F` | High-fps WebGL rendering for the Particle Universe and Tech Sphere. |
 | **Interactivity** | `Lenis` | Custom smooth scroll physics engine. |
 | **Testing** | `Vitest` & `Playwright` | Complete code-coverage via unit and E2E browser testing. |
@@ -109,7 +115,7 @@ npx playwright test
 
 ## 📡 CONTACT PROTOCOL
 
-Seeking collaboration on high-security distributed systems, generative AI models, or complex Web3 infrastructure? Initiate contact via the following nodes:
+Seeking collaboration on enterprise architectures, generative AI models, or complex Web3 infrastructure? Initiate contact via the following nodes:
 
 - **Email**: [contact@pranesh.s](mailto:contact@pranesh.s)
 - **LinkedIn**: [Connect with me](https://linkedin.com/in/yourprofile)
