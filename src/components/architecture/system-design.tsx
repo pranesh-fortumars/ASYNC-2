@@ -39,9 +39,10 @@ export function SystemDesignSection() {
           <p className="mt-4 text-white/50 font-mono tracking-widest uppercase text-sm">Scalable, Secure, and Event-Driven Designs</p>
         </motion.div>
 
-        <div className="relative w-full h-[500px] bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden">
-          {/* Cyber grid background */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <div className="w-full overflow-x-auto pb-4 custom-scrollbar">
+          <div className="relative min-w-[800px] w-full h-[500px] bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden">
+            {/* Cyber grid background */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
           
           <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
             {connections.map((conn, i) => (
@@ -90,6 +91,7 @@ export function SystemDesignSection() {
               <div className="absolute top-4 left-1/2 -translate-x-1/2 w-10 h-10 border border-primary/50 rounded-full animate-ping opacity-0 group-hover:opacity-100" />
             </motion.div>
           ))}
+          </div>
         </div>
       </div>
     </section>
