@@ -9,45 +9,109 @@ import { InViewWrapper } from "@/components/layout/in-view-wrapper";
 
 const skillCategories = [
   {
-    name: "Cyber Security",
-    color: "#ff003c",
-    position: [2.5, 1, 0] as [number, number, number],
-    skills: ["Pen Testing", "Ethical Hacking", "Digital Forensics"],
+    name: "Frontend",
+    color: "#00f0ff",
+    radius: 3.5,
+    speed: 0.2,
+    inclination: 0.2, // tilt of the orbit
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
   },
   {
-    name: "Development",
-    color: "#00f0ff",
-    position: [-2.5, -1, 0] as [number, number, number],
-    skills: ["React", "Next.js", "TypeScript", "Python"],
+    name: "Backend",
+    color: "#00ff88",
+    radius: 4.5,
+    speed: 0.15,
+    inclination: -0.4,
+    skills: ["Node.js", "Python", "Java", "GraphQL", "REST APIs"],
+  },
+  {
+    name: "Database",
+    color: "#ffc107",
+    radius: 5.5,
+    speed: 0.1,
+    inclination: 0.6,
+    skills: ["PostgreSQL", "MongoDB", "Redis", "Prisma"],
+  },
+  {
+    name: "Cloud & DevOps",
+    color: "#ff7b00",
+    radius: 6.5,
+    speed: 0.08,
+    inclination: -0.3,
+    skills: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+  },
+  {
+    name: "Cybersecurity",
+    color: "#ff003c",
+    radius: 3.0,
+    speed: 0.25,
+    inclination: 0.8,
+    skills: ["Pen Testing", "Ethical Hacking", "Cryptography", "Network Security"],
   },
   {
     name: "AI & ML",
     color: "#7a00ff",
-    position: [0, 2.5, 1] as [number, number, number],
-    skills: ["Deep Learning", "Computer Vision", "LLMs"],
+    radius: 4.0,
+    speed: 0.18,
+    inclination: -0.7,
+    skills: ["Deep Learning", "LLMs", "Computer Vision", "PyTorch"],
   },
   {
     name: "Blockchain",
-    color: "#00ff88",
-    position: [0, -2.5, -1] as [number, number, number],
-    skills: ["Ethereum", "Smart Contracts", "Solidity"],
+    color: "#ff00ea",
+    radius: 5.0,
+    speed: 0.12,
+    inclination: 0.4,
+    skills: ["Ethereum", "Smart Contracts", "Solidity", "Web3.js"],
+  },
+  {
+    name: "System Design",
+    color: "#ffffff",
+    radius: 6.0,
+    speed: 0.09,
+    inclination: -0.6,
+    skills: ["Microservices", "Event-Driven Architecture", "Scalability", "System Architecture"],
   },
 ];
 
 type SkillCategory = {
   name: string;
   color: string;
-  position: [number, number, number];
+  radius: number;
+  speed: number;
+  inclination: number;
   skills: string[];
 };
 
-function Planet({ data, onHover }: { data: SkillCategory; onHover: (d: SkillCategory | null) => void }) {
+function Planet({ data, onHover, index }: { data: SkillCategory; onHover: (d: SkillCategory | null) => void; index: number }) {
   const ref = useRef<THREE.Mesh>(null);
+  const textRef = useRef<THREE.Group>(null);
+  const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHover] = useState(false);
 
+  // Random starting phase so planets don't start in a line
+  const startPhase = index * (Math.PI / 4);
+
+  useFrame((state) => {
+    if (groupRef.current && !hovered) {
+      // Calculate orbital position
+      const t = state.clock.getElapsedTime() * data.speed + startPhase;
+      const x = Math.cos(t) * data.radius;
+      const z = Math.sin(t) * data.radius;
+      const y = Math.sin(t) * data.radius * data.inclination;
+      
+      groupRef.current.position.set(x, y, z);
+    }
+    
+    // Make text always face the camera
+    if (textRef.current) {
+      textRef.current.quaternion.copy(state.camera.quaternion);
+    }
+  });
+
   return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-      <group position={data.position}>
+    <group ref={groupRef}>
+      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
         <Sphere
           ref={ref}
           args={[0.6, 32, 32]}
@@ -55,10 +119,12 @@ function Planet({ data, onHover }: { data: SkillCategory; onHover: (d: SkillCate
             e.stopPropagation();
             setHover(true);
             onHover(data);
+            document.body.style.cursor = 'pointer';
           }}
           onPointerOut={() => {
             setHover(false);
             onHover(null);
+            document.body.style.cursor = 'auto';
           }}
         >
           <meshStandardMaterial
@@ -68,17 +134,21 @@ function Planet({ data, onHover }: { data: SkillCategory; onHover: (d: SkillCate
             wireframe={hovered}
           />
         </Sphere>
-        <Text
-          position={[0, -1, 0]}
-          fontSize={0.3}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-        >
-          {data.name}
-        </Text>
-      </group>
-    </Float>
+        <group ref={textRef}>
+          <Text
+            position={[0, -1.2, 0]}
+            fontSize={0.3}
+            color="white"
+            anchorX="center"
+            anchorY="middle"
+            outlineWidth={0.02}
+            outlineColor="#000000"
+          >
+            {data.name}
+          </Text>
+        </group>
+      </Float>
+    </group>
   );
 }
 
@@ -87,7 +157,9 @@ function Galaxy({ setHoveredData }: { setHoveredData: (d: SkillCategory | null) 
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.1;
+      // Very slow global rotation to give a dynamic feel
+      groupRef.current.rotation.y += delta * 0.05;
+      groupRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.1) * 0.1;
     }
   });
 
@@ -101,24 +173,25 @@ function Galaxy({ setHoveredData }: { setHoveredData: (d: SkillCategory | null) 
         <meshStandardMaterial color="#ffffff" emissive="#00f0ff" emissiveIntensity={2} />
       </Sphere>
 
-      {/* Orbit Rings / Neural Connections */}
+      {/* Spatial Orbit Rings */}
       {skillCategories.map((cat, i) => {
-        const radius = Math.sqrt(cat.position[0] ** 2 + cat.position[1] ** 2 + cat.position[2] ** 2);
         const points = [];
-        for (let angle = 0; angle <= Math.PI * 2; angle += 0.1) {
-          // Approximate orbit path for visual effect
-          points.push(new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * (cat.position[1]/2), Math.sin(angle) * radius));
+        for (let angle = 0; angle <= Math.PI * 2 + 0.1; angle += 0.1) {
+          points.push(new THREE.Vector3(
+            Math.cos(angle) * cat.radius, 
+            Math.sin(angle) * cat.radius * cat.inclination, 
+            Math.sin(angle) * cat.radius
+          ));
         }
         return (
           <group key={`orbit-${i}`}>
-            <Line points={points} color={cat.color} opacity={0.2} transparent lineWidth={1} />
-            <Line points={[new THREE.Vector3(0,0,0), new THREE.Vector3(...cat.position)]} color={cat.color} opacity={0.3} transparent lineWidth={2} dashed dashSize={0.2} gapSize={0.1} />
+            <Line points={points} color={cat.color} opacity={0.15} transparent lineWidth={1} />
           </group>
         );
       })}
 
       {skillCategories.map((category, idx) => (
-        <Planet key={idx} data={category} onHover={setHoveredData} />
+        <Planet key={idx} index={idx} data={category} onHover={setHoveredData} />
       ))}
     </group>
   );
