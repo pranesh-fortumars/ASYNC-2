@@ -17,7 +17,7 @@ export function PageLoader() {
   const [bootTextIndex, setBootTextIndex] = useState(0);
 
   useEffect(() => {
-    const duration = 3000; // 3 seconds loading
+    const duration = 800; // Drastically reduced for an instant load feel
     const interval = 30;
     let current = 0;
 
@@ -26,7 +26,8 @@ export function PageLoader() {
       if (current >= 100) {
         setProgress(100);
         clearInterval(timer);
-        setTimeout(() => setLoading(false), 800);
+        // Reduced to 200ms for barely any pause
+        setTimeout(() => setLoading(false), 200);
       } else {
         setProgress(Math.floor(current));
       }
