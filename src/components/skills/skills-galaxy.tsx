@@ -218,7 +218,11 @@ export function SkillsSection() {
 
       <div className="w-full h-[600px] relative">
         <InViewWrapper>
-          <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
+          <Canvas 
+            camera={{ position: [0, 0, 8], fov: 60 }}
+            dpr={[1, 1.5]}
+            gl={{ antialias: false, powerPreference: "high-performance" }}
+          >
             <OrbitControls enableZoom={false} enablePan={false} autoRotate={false} />
             <Galaxy setHoveredData={setHoveredData} />
           </Canvas>

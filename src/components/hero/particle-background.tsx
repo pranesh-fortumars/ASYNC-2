@@ -10,7 +10,8 @@ import { Code2, Database, Terminal } from "lucide-react";
 
 function StarfieldParticles() {
   const ref = useRef<THREE.Points>(null);
-  const count = 4000;
+  // Drastically reduced particle count from 4000 to 1200 to reduce GPU load while maintaining the aesthetic
+  const count = 1200;
   
   const positions = useMemo(() => {
     const p = new Float32Array(count * 3);
@@ -66,7 +67,8 @@ const AnimeEnergyParticles = () => {
   const [particles, setParticles] = useState<{ id: number; left: string; delay: number }[]>([]);
 
   useEffect(() => {
-    const p = Array.from({ length: 20 }).map((_, i) => ({
+    // Reduced from 20 to 8 to prevent DOM-based animation lag
+    const p = Array.from({ length: 8 }).map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       delay: Math.random() * 5,
@@ -142,7 +144,11 @@ export function ParticleBackground() {
       
       {/* Layer 2 & 7: ThreeJS Stars and Particles */}
       <div className="absolute inset-0 z-[3]">
-        <Canvas camera={{ position: [0, 0, 3] }}>
+        <Canvas 
+          camera={{ position: [0, 0, 3] }}
+          dpr={[1, 1.5]} // Caps pixel ratio to prevent extreme lag on Retina/4K displays
+          gl={{ antialias: false, powerPreference: "high-performance" }} // Optimizes WebGL rendering
+        >
           <StarfieldParticles />
         </Canvas>
       </div>
