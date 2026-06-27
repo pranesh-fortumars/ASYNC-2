@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
-import { Command, Palette } from "lucide-react";
+import { Command, Palette, Menu } from "lucide-react";
 
 export function Navbar() {
   const { scrollY } = useScroll();
@@ -70,19 +70,21 @@ export function Navbar() {
       }`}
     >
       <nav
-        className={`flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 ${
+        className={`relative flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 ${
           scrolled
             ? "bg-black/50 backdrop-blur-md border border-white/10 w-[90%] max-w-5xl"
             : "bg-transparent w-[95%] max-w-7xl"
         }`}
       >
-        <Link href="/" className="text-xl font-bold tracking-tighter flex items-center gap-2">
-          <span className="text-primary">&lt;</span>
-          Pranesh S
-          <span className="text-primary">/&gt;</span>
-        </Link>
+        <div className="flex-1 flex justify-start">
+          <Link href="/" className="text-xl font-bold tracking-tighter flex items-center gap-2">
+            <span className="text-primary">&lt;</span>
+            Pranesh S
+            <span className="text-primary">/&gt;</span>
+          </Link>
+        </div>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center justify-center gap-8 absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -94,7 +96,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex-1 flex items-center justify-end gap-3">
           <button 
             onClick={cycleTheme}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-white/5 hover:bg-white/10 hover:text-primary transition-colors border border-white/5"
@@ -106,9 +108,8 @@ export function Navbar() {
             </span>
           </button>
           
-          <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/10 backdrop-blur-sm">
-            <Command size={16} />
-            <span className="hidden sm:inline">Menu</span>
+          <button className="md:hidden flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/10 backdrop-blur-sm">
+            <Menu size={16} />
           </button>
         </div>
       </nav>
