@@ -175,8 +175,8 @@ npx playwright test
 
 Seeking collaboration on enterprise architectures, generative AI models, or complex Web3 infrastructure? Initiate contact via the following nodes:
 
-- **Email**: [contact@pranesh.s](mailto:contact@pranesh.s)
-- **LinkedIn**: [Connect with me](https://linkedin.com/in/yourprofile)
+- **Email**: [praneshs616@gmail.com](mailto:praneshs616@gmail.com)
+- **LinkedIn**: [Connect with me](https://www.linkedin.com/in/pranesh-s-ps34101136/)
 - **GitHub**: [praneshs616](https://github.com/praneshs616)
 
 <br/>
