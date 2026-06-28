@@ -38,7 +38,33 @@ This portfolio pioneers a unique **Anime-Tech Fusion** design language:
 
 ---
 
-## 🌟 CORE ARCHITECTURE & FEATURES
+## 🌟 ADVANCED ANIMATION ENGINE & PHYSICS
+
+This application utilizes a complex, multi-layered animation system to achieve a liquid-smooth, interactive user experience:
+
+- **Framer Motion Layout Projections**: Seamlessly animates components between different DOM states, providing fluid transitions for modals, popups, and the AI Terminal.
+- **Scroll-Linked SVG Tracing**: Uses Framer Motion's `useScroll` and `useTransform` hooks to trace dynamic SVG paths as the user scrolls, visualizing data flows in the `Tech Ecosystem` and `System Design` sections.
+- **Physics-Based Interactivity**: Features a custom-built Magnetic Cursor that uses spring physics (mass, damping, stiffness) to snap to interactive elements, completely replacing the default browser pointer.
+- **WebGL Hardware Acceleration**: Offloads heavy particle calculations and 3D celestial rendering to the GPU via `react-three-fiber`, ensuring 60 FPS even with thousands of moving nodes.
+- **Performance-Optimized Rendering**: Employs Intersection Observers (`InViewWrapper`) to automatically pause or unmount heavy animations when they leave the viewport, saving CPU/GPU cycles.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant FramerMotion
+    participant WebGL
+    User->>Browser: Scrolls Page
+    Browser->>FramerMotion: useScroll() triggers
+    FramerMotion-->>Browser: Updates SVG Draw Path
+    Browser->>WebGL: useFrame() ticks
+    WebGL-->>Browser: Re-renders 3D Particles
+    Note over Browser,WebGL: InViewWrapper intercepts hidden elements <br/>and suspends their rendering loop
+```
+
+---
+
+## 🏛️ ENTERPRISE ARCHITECTURE & COMPONENT TOPOLOGY
 
 ### 🎬 The Boot Sequence & Cinematic Scrolling
 - **Cinematic BootLoader:** Simulates a system startup featuring hex decryption matrices and a loading sequence before seamlessly transitioning into the global UI.
@@ -49,17 +75,36 @@ This portfolio pioneers a unique **Anime-Tech Fusion** design language:
 - **Skills Galaxy:** A mathematically calculated 3D orbital system categorizing technical expertise into interactive celestial bodies.
 - **Tech Sphere:** A constantly rotating, dynamic tag cloud of core technologies rendered natively on the canvas.
 
+### 🌐 Next.js 15 App Router & Turbopack
+- **Server-Side Rendering (SSR)**: Optimizes critical paths for SEO and rapid Initial Page Loads.
+- **Component Segregation**: Strict boundary enforcement between Server Components and Client Components (`"use client"`) to minimize JavaScript payload sizes.
+- **Dynamic Imports**: Heavy WebGL and 3D components are dynamically imported using `next/dynamic` with `ssr: false` to prevent hydration mismatches and block rendering.
+
+```mermaid
+graph TD
+    A[Client Request] --> B{Next.js App Router}
+    B -->|Server Side| C[layout.tsx]
+    B -->|Server Side| D[page.tsx]
+    C --> E[Global Styles & Fonts]
+    D --> F[Cinematic BootLoader]
+    F -->|On Complete| G[Dynamic Client Components]
+    G --> H((WebGL Particle Background))
+    G --> I[React Component Tree]
+    I --> J[Framer Motion Observables]
+    I --> K[System Design Diagram]
+```
+
 ### 🏛️ System Architect Ecosystem
-- **Tech Ecosystem Universe:** Visualizes the full stack (Frontend, Backend, Database, Cloud, Security, AI) with animated SVG data flows running between the layers.
-- **Enterprise System Design Map:** An interactive network architecture map showing Client -> API Gateway -> Microservices -> DB data flows with moving, glowing packets.
-- **Dev Command Center:** A futuristic metric dashboard showing live, animated counters for Applications Developed, APIs Built, Projects Delivered, and more.
-- **Interactive Project Showcase:** Holographic project cards with scanline animations and interactive deployment links.
-- **Neural Mind Map:** A complex data visualization graph mapping out problem-solving methodologies and architectural thinking.
-- **Cyber Command Center (Experience):** A high-tech timeline detailing professional experience, complete with holographic threat radars and spinning data nodes.
+- **Tech Ecosystem Universe**: Visualizes the full stack (Frontend, Backend, Database, Cloud, Security, AI) with animated SVG data flows running between the layers.
+- **Enterprise System Design Map**: An interactive network architecture map showing Client -> API Gateway -> Microservices -> DB data flows with moving, glowing packets.
+- **Dev Command Center**: A futuristic metric dashboard showing live, animated counters for Applications Developed, APIs Built, Projects Delivered, and more.
+- **Interactive Project Showcase**: Holographic project cards with scanline animations and interactive deployment links.
+- **Neural Mind Map**: A complex data visualization graph mapping out problem-solving methodologies and architectural thinking.
+- **Cyber Command Center (Experience)**: A high-tech timeline detailing professional experience, complete with holographic threat radars and spinning data nodes.
 
 ### 📡 Live Telemetry & Data Integration
-- **GitHub Analytics Engine:** Pulls real-time commit history, repository data, and contribution graphs directly via the GitHub API.
-- **LeetCode Integration:** Displays dynamic competitive programming stats and acceptance rates via custom API routing mechanisms with robust fallback states.
+- **GitHub Analytics Engine**: Pulls real-time commit history, repository data, and contribution graphs directly via the GitHub API. Uses Next.js caching to prevent API rate limiting.
+- **LeetCode Integration**: Displays dynamic competitive programming stats and acceptance rates via custom API routing mechanisms with robust fallback states.
 
 ### 🔐 Hidden Easter Eggs
 - **Solo Leveling "Awakening" Mode:** A hidden, hyper-drive aesthetic overlay triggered securely by the Konami Code (`↑ ↑ ↓ ↓ ← → ← → B A`), plunging the screen into darkness and triggering a massive "SYSTEM AWAKENED" holographic alert.
